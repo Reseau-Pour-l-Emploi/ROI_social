@@ -448,8 +448,8 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
      <div class="field">
       <label>Délai de stabilisation de l'impact (mois)</label>
       <div class="slider-wrap">
-       <input type="range" id="de-stab-slider" min="1" max="35" step="1" value="9" oninput="updateStabUI()">
-       <div class="slider-labels"><span>1 m</span><span>12</span><span>24</span><span>35 m</span></div>
+       <input type="range" id="de-stab-slider" min="1" max="11" step="1" value="9" oninput="updateStabUI()">
+       <div class="slider-labels" id="stab-slider-labels"><span>1 mois</span><span style="font-weight:600;color:var(--navy)" id="stab-max-label">11 mois</span></div>
       </div>
       <div class="stab-badge" id="stab-badge">Au bout de <b>9 mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>12<sup>e</sup> mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.</div>
      </div>
@@ -741,9 +741,14 @@ function updateStabUI(){
  const T=getHorizonValue();
  const stabSlider=document.getElementById('de-stab-slider');
  const maxStab=Math.max(1,T-1);
+ stabSlider.min=1;
  stabSlider.max=maxStab;
  let cur=parseInt(stabSlider.value)||1;
- if(cur>=T){cur=maxStab;stabSlider.value=cur;}
+ if(cur<1){cur=1;}
+ if(cur>maxStab){cur=maxStab;stabSlider.value=cur;}
+ // Update dynamic labels
+ const lbl=document.getElementById('stab-max-label');
+ if(lbl) lbl.textContent=maxStab+' mois';
  const ord=n=>n===1?'1<sup>er</sup>':n+'<sup>ème</sup>';
  document.getElementById('stab-badge').innerHTML=`Au bout de <b>${cur} mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>${ord(T)} mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.`;
  const pct=maxStab>1?((cur-1)/(maxStab-1))*100:100;
