@@ -12,11 +12,12 @@
 :root{--navy:#1c3461;--navy-dark:#0f1e38;--navy-light:#2a4a7f;--amber:#f0941d;--amber-light:#fef5e7;--amber-dark:#c47a10;--teal:#0e7490;--teal-light:#e0f2fe;--teal-dark:#0a5468;--bg:#eef2f7;--surface:#ffffff;--text:#1c2e4a;--muted:#6b7a8d;--border:#d8e2ef;--green:#1a8c4e;--red:#d43b3b;--radius:12px;--radius-sm:8px;--shadow:0 1px 3px rgba(0,0,0,.07),0 6px 20px rgba(0,0,0,.06)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
-header{background:var(--navy-dark);color:#fff;padding:26px 44px;position:relative;overflow:hidden}
-header::before{content:'';position:absolute;top:-70px;right:-70px;width:300px;height:300px;border:55px solid rgba(255,255,255,.04);border-radius:50%}
-.badge{display:inline-block;background:rgba(240,148,29,.18);color:var(--amber);border:1px solid rgba(240,148,29,.3);padding:3px 11px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
-header h1{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;line-height:1.25;max-width:600px}
-header p{margin-top:5px;opacity:.6;max-width:560px;font-size:13px}
+header{background:linear-gradient(135deg,#2d5fa8 0%,#3a74c8 60%,#2e63b0 100%);color:#fff;padding:26px 44px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-70px;right:-70px;width:300px;height:300px;border:55px solid rgba(255,255,255,.07);border-radius:50%}
+header::after{content:'';position:absolute;bottom:-80px;left:60%;width:220px;height:220px;border:40px solid rgba(255,255,255,.04);border-radius:50%}
+.badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35);padding:3px 11px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
+header h1{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;line-height:1.25;max-width:600px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.15)}
+header p{margin-top:5px;opacity:.82;max-width:560px;font-size:13px;color:#dce8ff}
 .mode-bar{background:var(--navy);padding:0 44px;display:flex;align-items:stretch}
 .mode-tab{display:flex;align-items:center;gap:8px;padding:12px 24px;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.55);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
 .mode-tab:hover{color:rgba(255,255,255,.85)}
@@ -67,9 +68,22 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 .horizon-btn label .hunit{font-size:8px;text-transform:uppercase;letter-spacing:.05em}
 .horizon-btn input:checked+label{border-color:var(--navy);background:rgba(28,52,97,.07);color:var(--navy)}
 .horizon-btn input:checked+label .hval{color:var(--navy)}
-.horizon-note{background:#f0f9ff;border:1px solid rgba(14,116,144,.2);border-radius:var(--radius-sm);padding:9px 11px;margin-top:5px}
+.horizon-custom{display:flex;align-items:center;gap:6px;margin-top:6px}
+.horizon-custom label{font-size:10.5px;color:var(--muted);white-space:nowrap;margin:0}
+.horizon-custom input{width:64px;height:30px;padding:0 6px;font-size:13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border-color .2s;-moz-appearance:textfield;text-align:center}
+.horizon-custom input::-webkit-inner-spin-button{-webkit-appearance:none}
+.horizon-custom input:focus{border-color:var(--navy)}
+.horizon-custom span{font-size:11px;color:var(--muted)}
 .horizon-note p{font-size:10.5px;color:var(--teal-dark);line-height:1.5;margin-bottom:4px}
 .horizon-note p:last-child{margin-bottom:0}
+/* ECART BOUNDS */
+.ecart-bounds{display:flex;align-items:center;gap:6px;margin-bottom:8px;background:var(--bg);border-radius:var(--radius-sm);padding:6px 10px;flex-wrap:wrap}
+.ecart-bounds label{font-size:10.5px;color:var(--muted);margin:0;white-space:nowrap}
+.ecart-bounds input{width:54px;height:28px;padding:0 5px;font-size:12.5px;border:1.5px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border-color .2s;-moz-appearance:textfield;text-align:center}
+.ecart-bounds input::-webkit-inner-spin-button{-webkit-appearance:none}
+.ecart-bounds input:focus{border-color:var(--navy)}
+.ecart-bounds span{font-size:10.5px;color:var(--muted)}
+.ecart-bounds .sep{flex:1}
 /* RADIO ROW */
 .radio-row{display:flex;gap:6px}
 .radio-opt{flex:1;position:relative}
@@ -245,7 +259,8 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
   .kpi-row{display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:5pt !important;break-inside:avoid}
   .kpi{padding:7pt 8pt !important;box-shadow:none !important;border:1px solid var(--border) !important}
   .kpi-val{font-size:14pt !important}.kpi-label{font-size:7pt !important}.kpi-sub{font-size:7pt !important}
-  .chart-card{padding:6pt 8pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid}
+  .chart-card{padding:6pt 8pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid;text-align:center}
+  .chart-card .chart-ttl,.chart-card .chart-sub,.chart-card .chart-footnote{text-align:left}
   .chart-ttl{font-size:9.5pt !important;margin-bottom:1pt !important}
   .chart-sub{font-size:7pt !important;margin-bottom:4pt !important}
   .ch-wrap{height:86pt !important}.ch-wrap canvas{max-height:86pt !important}
@@ -257,6 +272,10 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
   .nm-item{font-size:8pt !important;padding:5pt 6pt !important}
   /* PAGE 2 */
   .print-page2{break-before:page}
+  .print-page2-header{display:block !important;background:linear-gradient(135deg,#2d5fa8,#3a74c8) !important;color:#fff !important;border-radius:4pt !important;padding:8pt 12pt !important;margin-bottom:6pt !important;break-inside:avoid}
+  .print-page2-header .action-titre{font-size:12pt !important;margin-bottom:2pt !important}
+  .print-page2-header .action-desc{font-size:8pt !important;padding-top:4pt !important}
+  .print-page2-header .action-header-meta{margin-bottom:3pt !important}
   .method{padding:8pt 10pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid}
   .method-grid{grid-template-columns:1fr 1fr !important;gap:5pt !important}
   .method-item p{font-size:8pt !important}
@@ -279,7 +298,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 <div class="modal-overlay" id="aide-modal" onclick="if(event.target===this)closeAide()">
  <div class="modal">
   <div class="modal-hd">
-   <h2>📚 Notes de lecture — Concepts clés de l'évaluation</h2>
+   <h2>🔑 Notions clés — Évaluation des politiques d'emploi</h2>
    <button class="modal-close" onclick="closeAide()">✕</button>
   </div>
   <div class="modal-bd">
@@ -307,7 +326,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
  </div>
 </div>
 
-<button class="aide-btn-float" onclick="openAide()" title="Notes de lecture">📚</button>
+<button class="aide-btn-float" onclick="openAide()" title="Notions clés">🔑</button>
 
 <!-- HEADER -->
 <header>
@@ -375,7 +394,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
    <div class="card">
     <div class="card-hd"><div class="card-hd-icon">📊</div><h2>Horizon &amp; Impact</h2></div>
     <div class="card-bd">
-     <button class="aide-btn" onclick="openAide()">📚 Aide — Notes de lecture</button>
+     <button class="aide-btn" onclick="openAide()">🔑 Notions clés</button>
 
      <div class="field">
       <label>Horizon d'évaluation du ROI social</label>
@@ -387,7 +406,12 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
        <div class="horizon-btn"><input type="radio" id="h36" name="de-horizon" value="36"><label for="h36"><span class="hval">36</span><span class="hunit">mois</span></label></div>
       </div>
       <p class="hint" id="horizon-desc-hint" style="margin-bottom:5px"></p>
-      <div class="horizon-note">
+      <div class="horizon-custom">
+       <label for="de-horizon-custom">Ou saisir librement :</label>
+       <input type="number" id="de-horizon-custom" min="1" max="120" placeholder="ex. 18" oninput="onHorizonCustomInput(this.value)">
+       <span>mois</span>
+      </div>
+      <div class="horizon-note" style="margin-top:6px">
        <p>⏱ <b>L'horizon doit tenir compte de la durée du dispositif</b> et des effets d'enfermement. Une formation de 6 mois requiert un horizon bien plus lointain qu'un atelier de 2 jours.</p>
        <p>🔭 <b>Un horizon de 24 mois n'implique pas d'attendre 24 mois.</b> Des hypothèses raisonnables permettent d'<b>anticiper une fourchette de ROI</b> dès une évaluation intermédiaire.</p>
        <p>📐 <b>L'horizon doit être suffisamment lointain</b> pour que les effets d'enfermement soient atténués et que la suite du parcours ne soit plus corrélée à l'action.</p>
@@ -398,6 +422,15 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 
      <div class="field">
       <label>Écart de taux de présence en emploi — bénéficiaires − témoins (points)</label>
+      <div class="ecart-bounds">
+       <label for="ecart-min">Min :</label>
+       <input type="number" id="ecart-min" value="-5" step="0.5" oninput="updateEcartBounds()">
+       <span>pp</span>
+       <span class="sep"></span>
+       <label for="ecart-max">Max :</label>
+       <input type="number" id="ecart-max" value="10" step="0.5" oninput="updateEcartBounds()">
+       <span>pp</span>
+      </div>
       <div class="slider-wrap">
        <input type="range" id="de-ecart-slider" min="-5" max="10" step="0.5" value="2" oninput="updateEcartUI()">
        <div class="slider-labels"><span style="color:var(--red)">−5 pp</span><span>0</span><span>+5</span><span style="color:var(--green)">+10 pp</span></div>
@@ -521,6 +554,16 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
    <!-- PAGE 2 à l'impression -->
    <div class="print-page2">
 
+    <!-- Bandeau de titre répété en haut de la page 2 (visible uniquement à l'impression) -->
+    <div class="print-page2-header" style="display:none" id="p2-header">
+     <div class="action-header-meta">
+      <span class="action-territoire" id="p2-territoire"></span>
+      <span class="action-horizon-badge" id="p2-badge"></span>
+     </div>
+     <div class="action-titre" id="p2-titre"></div>
+     <div class="action-desc" id="p2-desc"></div>
+    </div>
+
     <div class="method">
      <h3>Méthodologie &amp; décomposition</h3>
      <div class="method-grid">
@@ -640,8 +683,42 @@ function switchMode(m){
  document.getElementById('ent-ct-display').textContent=fmtEur(t);
 }));
 document.querySelectorAll('input[name="de-atype"]').forEach(r=>r.addEventListener('change',()=>document.getElementById('dur-field').classList.toggle('show',r.value==='duree'&&r.checked)));
-document.querySelectorAll('input[name="de-horizon"]').forEach(r=>r.addEventListener('change',()=>{document.getElementById('horizon-desc-hint').textContent=HORIZON_HINTS[r.value]||'';updateStabUI()}));
+document.querySelectorAll('input[name="de-horizon"]').forEach(r=>r.addEventListener('change',()=>{
+ document.getElementById('horizon-desc-hint').textContent=HORIZON_HINTS[r.value]||'';
+ document.getElementById('de-horizon-custom').value='';
+ updateStabUI();
+}));
 document.getElementById('horizon-desc-hint').textContent=HORIZON_HINTS['12'];
+
+function getHorizonValue(){
+ const custom=parseInt(document.getElementById('de-horizon-custom').value);
+ if(custom>0)return custom;
+ const horizEl=document.querySelector('input[name="de-horizon"]:checked');
+ return horizEl?parseInt(horizEl.value):12;
+}
+
+function onHorizonCustomInput(v){
+ // Deselect radio buttons when typing custom value
+ if(v&&parseInt(v)>0){
+  document.querySelectorAll('input[name="de-horizon"]').forEach(r=>r.checked=false);
+  document.getElementById('horizon-desc-hint').textContent='✏️ Horizon personnalisé : '+v+' mois';
+ }
+ updateStabUI();
+}
+
+function updateEcartBounds(){
+ const minV=parseFloat(document.getElementById('ecart-min').value);
+ const maxV=parseFloat(document.getElementById('ecart-max').value);
+ if(isNaN(minV)||isNaN(maxV)||minV>=maxV)return;
+ const sl=document.getElementById('de-ecart-slider');
+ sl.min=minV;sl.max=maxV;
+ // Clamp current value
+ let cur=parseFloat(sl.value);
+ if(cur<minV)cur=minV;
+ if(cur>maxV)cur=maxV;
+ sl.value=cur;
+ updateEcartUI();
+}
 
 function getBand(v){if(v<0)return ECART_BANDS[0];if(v<1)return ECART_BANDS[1];if(v<3)return ECART_BANDS[2];if(v<5)return ECART_BANDS[3];return ECART_BANDS[4]}
 
@@ -653,19 +730,24 @@ function updateEcartUI(){
  document.getElementById('ecart-badge-ico').textContent=b.ico;
  document.getElementById('ecart-badge-val').textContent=(v>=0?'+':'')+v.toFixed(1).replace('.',',');
  document.getElementById('ecart-badge-label').textContent=' point'+(Math.abs(v)>1?'s':'')+' — '+b.label;
- const pct=((v-(-5))/(10-(-5)))*100;
- document.getElementById('de-ecart-slider').style.background=`linear-gradient(to right,${b.color} 0%,${b.color} ${pct}%,#d8e2ef ${pct}%,#d8e2ef 100%)`;
+ const sl=document.getElementById('de-ecart-slider');
+ const minV=parseFloat(sl.min);const maxV=parseFloat(sl.max);
+ const pct=((v-minV)/(maxV-minV||1))*100;
+ sl.style.background=`linear-gradient(to right,${b.color} 0%,${b.color} ${pct}%,#d8e2ef ${pct}%,#d8e2ef 100%)`;
 }
 updateEcartUI();
 
 function updateStabUI(){
- const s=parseInt(document.getElementById('de-stab-slider').value);
- const horizEl=document.querySelector('input[name="de-horizon"]:checked');
- const T=horizEl?parseInt(horizEl.value):12;
+ const T=getHorizonValue();
+ const stabSlider=document.getElementById('de-stab-slider');
+ const maxStab=Math.max(1,T-1);
+ stabSlider.max=maxStab;
+ let cur=parseInt(stabSlider.value)||1;
+ if(cur>=T){cur=maxStab;stabSlider.value=cur;}
  const ord=n=>n===1?'1<sup>er</sup>':n+'<sup>ème</sup>';
- document.getElementById('stab-badge').innerHTML=`Au bout de <b>${s} mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>${ord(T)} mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.`;
- const pct=((s-1)/(35-1))*100;
- document.getElementById('de-stab-slider').style.background=`linear-gradient(to right,var(--navy) 0%,var(--navy) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
+ document.getElementById('stab-badge').innerHTML=`Au bout de <b>${cur} mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>${ord(T)} mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.`;
+ const pct=maxStab>1?((cur-1)/(maxStab-1))*100:100;
+ stabSlider.style.background=`linear-gradient(to right,var(--navy) 0%,var(--navy) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
 }
 updateStabUI();
 
@@ -779,8 +861,7 @@ function calculateDE(){
  const cA=parseFloat(document.getElementById('de-c-autres').value)||0;
  const atype=document.querySelector('input[name="de-atype"]:checked').value;
  const D=parseFloat(document.getElementById('de-duree').value)||0;
- const horizEl=document.querySelector('input[name="de-horizon"]:checked');
- const T=horizEl?parseInt(horizEl.value):0;
+ const T=getHorizonValue();
  const ecartVal=parseFloat(document.getElementById('de-ecart-slider').value);
  const stab=parseInt(document.getElementById('de-stab-slider').value)||0;
  const totalCost=cH+cL+cP+cA;
@@ -791,7 +872,7 @@ function calculateDE(){
  const errs=[];
  if(!N||N<=0)errs.push('Nombre de bénéficiaires invalide.');
  if(totalCost<=0)errs.push('Veuillez saisir au moins un poste de coût.');
- if(!T||T<=0)errs.push('Veuillez sélectionner un horizon.');
+ if(!T||T<=0)errs.push('Veuillez sélectionner ou saisir un horizon.');
  if(!stab||stab<=0)errs.push('Délai de stabilisation invalide.');
  if(stab>=T)errs.push('Délai de stabilisation ('+stab+'m) doit être < horizon ('+T+'m).');
  if(atype==='duree'){if(!D||D<=0)errs.push('Durée du dispositif manquante.');if(D>=T)errs.push('Durée doit être < horizon.');if(D>=stab)errs.push('Durée doit être < délai de stabilisation.');}
@@ -799,10 +880,16 @@ function calculateDE(){
  const rMid=computeROI(N,totalCost,T,atype,D,stab,ecartVal);
  const rLow=computeROI(N,totalCost,T,atype,D,stab,band.low);
  const rHigh=computeROI(N,totalCost,T,atype,D,stab,band.high);
+ const badgeText='Horizon : '+T+' mois · '+(ecartVal>=0?'+':'')+ecartVal.toFixed(1)+' pp ('+band.label+')';
  document.getElementById('res-de-titre').textContent=titre||'Action non nommée';
  document.getElementById('res-de-territoire').textContent=territoire||'';
  document.getElementById('res-de-desc').textContent=desc||'';
- document.getElementById('res-de-horizon-badge').textContent='Horizon : '+T+' mois · '+(ecartVal>=0?'+':'')+ecartVal.toFixed(1)+' pp ('+band.label+')';
+ document.getElementById('res-de-horizon-badge').textContent=badgeText;
+ // Sync page-2 header
+ document.getElementById('p2-titre').textContent=titre||'Action non nommée';
+ document.getElementById('p2-territoire').textContent=territoire||'';
+ document.getElementById('p2-badge').textContent=badgeText;
+ document.getElementById('p2-desc').textContent=desc||'';
  document.getElementById('empty').style.display='none';
  document.getElementById('res-ent').style.display='none';
  const el=document.getElementById('res-de');el.style.display='flex';
