@@ -223,1156 +223,669 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
   header{padding:20px 16px}.mode-bar{padding:0 12px}.mode-tab{padding:10px 12px;font-size:11px}
   .wrap{padding:14px 12px}.kpi-row,.kpi-row-2{grid-template-columns:1fr}
   .method-grid,.glossary-grid,.modal-grid{grid-template-columns:1fr}
-  .decomp-row{grid-template-columns:1fr 1fr}.horizo
-    /* ── HEADER ── */
-    header {
-      background:var(--navy-dark); color:#fff;
-      padding:32px 48px; position:relative; overflow:hidden;
-    }
-    header::before {
-      content:''; position:absolute; top:-80px; right:-80px;
-      width:360px; height:360px;
-      border:70px solid rgba(255,255,255,.04); border-radius:50%;
-    }
-    header::after {
-      content:''; position:absolute; bottom:-100px; right:140px;
-      width:240px; height:240px;
-      border:50px solid rgba(240,148,29,.09); border-radius:50%;
-    }
-    .badge {
-      display:inline-block;
-      background:rgba(240,148,29,.18); color:var(--amber);
-      border:1px solid rgba(240,148,29,.3);
-      padding:3px 11px; border-radius:20px;
-      font-size:11px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
-      margin-bottom:10px;
-    }
-    header h1 { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; line-height:1.25; max-width:620px; }
-    header p  { margin-top:6px; opacity:.6; max-width:580px; font-size:13px; }
-
-    /* ── MODE SWITCHER ── */
-    .mode-bar {
-      background:var(--navy); padding:0 48px;
-      display:flex; align-items:stretch; gap:0;
-    }
-    .mode-tab {
-      display:flex; align-items:center; gap:9px;
-      padding:14px 28px; cursor:pointer;
-      border:none; background:transparent; color:rgba(255,255,255,.55);
-      font-family:'Syne',sans-serif; font-size:13.5px; font-weight:700;
-      border-bottom:3px solid transparent;
-      transition:all .2s; white-space:nowrap;
-    }
-    .mode-tab:hover { color:rgba(255,255,255,.85); }
-    .mode-tab.active { color:#fff; border-bottom-color:var(--amber); }
-    .mode-tab.active.teal { border-bottom-color:#5eead4; }
-    .mode-tab .tab-ico { font-size:18px; }
-    @media(max-width:600px) {
-      .mode-bar { padding:0 16px; }
-      .mode-tab { padding:12px 16px; font-size:12px; }
-    }
-
-    /* ── LAYOUT ── */
-    .wrap {
-      max-width:1300px; margin:0 auto; padding:28px 24px;
-      display:grid; grid-template-columns:390px 1fr; gap:24px; align-items:start;
-    }
-    .sidebar { position:sticky; top:24px; display:flex; flex-direction:column; gap:16px; }
-
-    /* ── PANEL VISIBILITY ── */
-    .mode-panel { display:none; }
-    .mode-panel.active { display:contents; }
-
-    /* ── CARD ── */
-    .card { background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
-    .card-hd {
-      padding:14px 20px; border-bottom:1px solid var(--border);
-      display:flex; align-items:center; gap:10px;
-    }
-    .card-hd-icon {
-      width:30px; height:30px; border-radius:7px;
-      background:var(--navy); color:#fff;
-      display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0;
-    }
-    .card-hd-icon.teal { background:var(--teal); }
-    .card-hd h2 { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--navy); }
-    .card-hd h2.teal { color:var(--teal-dark); }
-    .card-bd { padding:18px 20px; }
-
-    /* ── FORM ── */
-    .field { margin-bottom:14px; }
-    .field:last-child { margin-bottom:0; }
-    label { display:block; font-size:12.5px; font-weight:500; color:var(--muted); margin-bottom:5px; }
-    .inp-wrap { position:relative; }
-    input[type=number] {
-      width:100%; height:38px; padding:0 42px 0 12px;
-      border:1.5px solid var(--border); border-radius:var(--radius-sm);
-      font-family:'DM Sans',sans-serif; font-size:14px;
-      color:var(--text); background:var(--surface);
-      transition:border-color .2s; outline:none; -moz-appearance:textfield;
-    }
-    input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; }
-    input[type=number]:focus { border-color:var(--navy); }
-    input[type=number].teal-focus:focus { border-color:var(--teal); }
-    .suffix {
-      position:absolute; right:11px; top:50%; transform:translateY(-50%);
-      color:var(--muted); font-size:12px; pointer-events:none; max-width:34px;
-      text-align:right; line-height:1.2;
-    }
-    .hint { font-size:11.5px; color:var(--muted); margin-top:5px; line-height:1.45; }
-    .hint b { color:var(--amber-dark); }
-    .hint b.teal { color:var(--teal); }
-
-    /* cost grid */
-    .cost-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .cost-total {
-      grid-column:1/-1; background:var(--bg); border-radius:var(--radius-sm);
-      padding:9px 14px; margin-top:2px;
-      display:flex; justify-content:space-between; align-items:center;
-      font-size:12.5px; color:var(--muted);
-    }
-    .cost-total strong { font-family:'Syne',sans-serif; font-size:14px; color:var(--navy); }
-
-    /* radio */
-    .radio-row { display:flex; gap:8px; }
-    .radio-opt { flex:1; position:relative; }
-    .radio-opt input[type=radio] { position:absolute; opacity:0; width:0; }
-    .radio-opt label {
-      display:flex; flex-direction:column; align-items:center; gap:3px;
-      padding:11px 6px; border:1.5px solid var(--border); border-radius:var(--radius-sm);
-      cursor:pointer; transition:all .2s; text-align:center;
-      color:var(--muted); font-size:12px; font-weight:500; margin:0;
-    }
-    .radio-opt label .ico { font-size:18px; }
-    .radio-opt input:checked + label { border-color:var(--navy); background:rgba(28,52,97,.06); color:var(--navy); }
-
-    /* toggle */
-    #dur-field { display:none; }
-    #dur-field.show { display:block; animation:fadeUp .25s ease; }
-
-    /* fixed params */
-    .fixed-box {
-      background:var(--amber-light); border:1px solid rgba(240,148,29,.28);
-      border-radius:var(--radius-sm); padding:11px 14px; margin-top:14px;
-    }
-    .fixed-box.teal {
-      background:var(--teal-light); border:1px solid rgba(14,116,144,.25);
-    }
-    .fixed-box-title { font-size:10.5px; font-weight:700; color:var(--amber-dark); text-transform:uppercase; letter-spacing:.07em; margin-bottom:6px; }
-    .fixed-box-title.teal { color:var(--teal-dark); }
-    .fixed-box-rows { display:flex; flex-direction:column; gap:3px; }
-    .fixed-box-rows span { font-size:12px; color:var(--muted); }
-    .fixed-box-rows span b { color:var(--text); }
-
-    .divider { height:1px; background:var(--border); margin:14px 0; }
-    .slabel { font-size:10.5px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
-
-    /* info box */
-    .info-box {
-      background:#f0f9ff; border:1px solid rgba(14,116,144,.2);
-      border-radius:var(--radius-sm); padding:11px 14px; margin-bottom:14px;
-      font-size:12px; color:var(--teal-dark); line-height:1.55;
-    }
-    .info-box b { font-weight:600; }
-
-    /* subsection */
-    .sub-field {
-      background:var(--bg); border-radius:var(--radius-sm);
-      padding:12px 14px; margin-bottom:10px;
-    }
-    .sub-field label { color:var(--teal-dark); }
-
-    /* dependent field hint */
-    .dep-hint {
-      display:flex; gap:6px; align-items:flex-start;
-      background:#fff8ec; border:1px solid rgba(240,148,29,.2);
-      border-radius:6px; padding:8px 10px; margin-top:8px;
-      font-size:11.5px; color:var(--amber-dark); line-height:1.45;
-    }
-
-    /* CTA button */
-    .btn-calc {
-      width:100%; height:48px; background:var(--navy); color:#fff;
-      border:none; border-radius:var(--radius-sm);
-      font-family:'Syne',sans-serif; font-size:15px; font-weight:700;
-      cursor:pointer; transition:background .2s, transform .1s;
-      display:flex; align-items:center; justify-content:center; gap:8px;
-    }
-    .btn-calc:hover { background:var(--navy-light); }
-    .btn-calc:active { transform:scale(.99); }
-    .btn-calc.teal { background:var(--teal); }
-    .btn-calc.teal:hover { background:var(--teal-dark); }
-    .btn-calc .arr { transition:transform .2s; }
-    .btn-calc:hover .arr { transform:translateX(4px); }
-
-    /* ── RESULTS ── */
-    .results { display:flex; flex-direction:column; gap:20px; }
-    #empty { text-align:center; }
-    #empty .card-bd { padding:60px 40px; }
-    #empty .big-icon { font-size:44px; margin-bottom:14px; }
-    #empty h3 { font-family:'Syne',sans-serif; font-size:18px; color:var(--navy); margin-bottom:8px; }
-    #empty p { color:var(--muted); font-size:13.5px; }
-    #res-de  { display:none; flex-direction:column; gap:20px; }
-    #res-ent { display:none; flex-direction:column; gap:20px; }
-
-    /* KPI row */
-    .kpi-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .kpi-row-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-    .kpi {
-      background:var(--surface); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:18px 20px; position:relative; overflow:hidden;
-    }
-    .kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
-    .kpi.c-cost::before   { background:var(--amber); }
-    .kpi.c-days::before   { background:var(--navy-light); }
-    .kpi.c-roi::before    { background:var(--green); }
-    .kpi.c-roi.neg::before { background:var(--red); }
-    .kpi.c-offres::before { background:var(--teal); }
-    .kpi.c-benefice::before { background:var(--green); }
-    .kpi.c-benefice.neg::before { background:var(--red); }
-    .kpi-bg-icon { position:absolute; top:14px; right:16px; font-size:22px; opacity:.13; }
-    .kpi-label { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
-    .kpi-val { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:var(--navy); line-height:1; }
-    .kpi-val.pos { color:var(--green); }
-    .kpi-val.neg { color:var(--red); }
-    .kpi-sub { font-size:12px; color:var(--muted); margin-top:5px; }
-
-    /* chart cards */
-    .chart-card { background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px 24px; }
-    .chart-ttl { font-family:'Syne',sans-serif; font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:3px; }
-    .chart-sub { font-size:12px; color:var(--muted); margin-bottom:18px; }
-    .ch-wrap { position:relative; }
-
-    /* interpretation */
-    .interp { background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 24px; }
-    .interp-hd { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-    .interp-hd h3 { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--navy); }
-    .interp-txt { font-size:13.5px; color:var(--text); line-height:1.65; }
-
-    /* method */
-    .method { background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 24px; }
-    .method h3 { font-family:'Syne',sans-serif; font-size:13.5px; font-weight:700; color:var(--navy); margin-bottom:12px; }
-    .method-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .method-item { display:flex; gap:9px; align-items:flex-start; }
-    .method-dot { width:7px; height:7px; border-radius:50%; background:var(--amber); flex-shrink:0; margin-top:7px; }
-    .method-dot.teal { background:var(--teal); }
-    .method-item p { font-size:12px; color:var(--muted); line-height:1.5; }
-    .method-item p b { color:var(--text); }
-    .decomp-row {
-      display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
-      margin-top:12px; padding-top:12px; border-top:1px solid var(--border);
-    }
-    .decomp-item { background:var(--bg); border-radius:6px; padding:8px 10px; text-align:center; }
-    .decomp-item .dval { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--navy); }
-    .decomp-item .dlabel { font-size:10.5px; color:var(--muted); margin-top:2px; line-height:1.3; }
-
-    /* formula box */
-    .formula-box {
-      background:#f8f9fa; border:1px solid var(--border); border-radius:var(--radius-sm);
-      padding:14px 18px; margin-top:14px; font-size:12.5px; color:var(--muted); line-height:1.7;
-    }
-    .formula-box .formula-title { font-size:10.5px; font-weight:700; color:var(--teal-dark); text-transform:uppercase; letter-spacing:.07em; margin-bottom:6px; }
-    .formula-box code { font-family:monospace; font-size:12px; background:rgba(14,116,144,.08); padding:2px 5px; border-radius:4px; color:var(--teal-dark); }
-
-    /* animations */
-    @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-    .fade-in { animation:fadeUp .4s ease forwards; }
-
-    /* responsive */
-    @media(max-width:960px) { .wrap { grid-template-columns:1fr; } .sidebar { position:static; } }
-    @media(max-width:640px) {
-      header { padding:24px 20px; }
-      .wrap { padding:20px 16px; }
-      .kpi-row, .kpi-row-2 { grid-template-columns:1fr; }
-      .method-grid { grid-template-columns:1fr; }
-      .decomp-row { grid-template-columns:1fr 1fr; }
-    }
-  </style>
+  .decomp-row{grid-template-columns:1fr 1fr}.horizon-btns{grid-template-columns:repeat(3,1fr)}
+  .non-monetise-items{grid-template-columns:1fr}
+}
+/* ═══════════════════════════════════════
+   IMPRESSION A4 — 2 PAGES
+═══════════════════════════════════════ */
+@media print{
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+  @page{size:A4 portrait;margin:10mm 10mm 13mm 10mm}
+  body{background:#fff !important;font-size:9pt !important}
+  header,.mode-bar,.sidebar,#empty,#res-ent,.print-bar,.aide-btn,.aide-btn-float,.modal-overlay,.edit-hint{display:none !important}
+  .wrap{display:block !important;padding:0 !important;max-width:100% !important}
+  .results{display:block !important}
+  #res-de{display:block !important;gap:0 !important}
+  #res-de>*{margin-bottom:5pt !important}
+  /* PAGE 1 */
+  .action-header{background:var(--navy-dark) !important;color:#fff !important;border-radius:4pt !important;padding:10pt 12pt !important;margin-bottom:6pt !important;break-inside:avoid}
+  .action-titre{font-size:14pt !important;margin-bottom:3pt !important}
+  .action-desc{font-size:8.5pt !important}
+  .kpi-row{display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:5pt !important;break-inside:avoid}
+  .kpi{padding:7pt 8pt !important;box-shadow:none !important;border:1px solid var(--border) !important}
+  .kpi-val{font-size:14pt !important}.kpi-label{font-size:7pt !important}.kpi-sub{font-size:7pt !important}
+  .chart-card{padding:6pt 8pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid}
+  .chart-ttl{font-size:9.5pt !important;margin-bottom:1pt !important}
+  .chart-sub{font-size:7pt !important;margin-bottom:4pt !important}
+  .ch-wrap{height:86pt !important}.ch-wrap canvas{max-height:86pt !important}
+  .chart-footnote{font-size:7pt !important}
+  .interp{padding:8pt 10pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid}
+  .interp-txt{font-size:8.5pt !important}
+  .non-monetise{break-inside:avoid}
+  .non-monetise-items{grid-template-columns:repeat(3,1fr) !important}
+  .nm-item{font-size:8pt !important;padding:5pt 6pt !important}
+  /* PAGE 2 */
+  .print-page2{break-before:page}
+  .method{padding:8pt 10pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid}
+  .method-grid{grid-template-columns:1fr 1fr !important;gap:5pt !important}
+  .method-item p{font-size:8pt !important}
+  .decomp-row{grid-template-columns:repeat(4,1fr) !important;gap:4pt !important}
+  .decomp-item .dval{font-size:11pt !important}.decomp-item .dlabel{font-size:7pt !important}
+  .glossary{padding:8pt 10pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid}
+  .glossary-grid{grid-template-columns:1fr 1fr !important;gap:9pt !important}
+  .glossary-def{font-size:8pt !important}
+  .glossary-note p{font-size:8pt !important}
+  .complements-card{padding:8pt 10pt !important;box-shadow:none !important;border:1px solid var(--border) !important;break-inside:avoid}
+  .complements-card h3{font-size:10.5pt !important}
+  .complements-card textarea{min-height:75pt;font-size:8.5pt !important}
+  a::after{display:none !important}
+}
+</style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════
-     HEADER
-════════════════════════════════════════════ -->
+<!-- MODAL AIDE -->
+<div class="modal-overlay" id="aide-modal" onclick="if(event.target===this)closeAide()">
+ <div class="modal">
+  <div class="modal-hd">
+   <h2>📚 Notes de lecture — Concepts clés de l'évaluation</h2>
+   <button class="modal-close" onclick="closeAide()">✕</button>
+  </div>
+  <div class="modal-bd">
+   <div class="modal-grid">
+    <div><div class="modal-term">🔒 Effet d'enfermement (lock-in)</div>
+     <div class="modal-def">Pendant la durée d'un dispositif (formation, accompagnement), les bénéficiaires sont <b>partiellement indisponibles</b> pour l'emploi. Leur taux de présence en emploi peut être <b>temporairement inférieur</b> à celui du groupe témoin — ce n'est pas un échec, c'est un <b>coût temporaire</b> qui précède le gain attendu.<br><br>
+     Le décideur ne doit <b>pas interrompre</b> l'action sur la foi de chiffres négatifs à mi-parcours.<br><br>
+     <em>Analogie F1 : le pilote qui rentre au stand est momentanément doublé, mais ressort avec des pneus neufs qui lui permettent de dépasser définitivement ses adversaires.</em></div></div>
+    <div><div class="modal-term">⚖️ Honnêteté intellectuelle &amp; neutralité</div>
+     <div class="modal-def">L'évaluateur doit <b>accepter l'effet d'enfermement</b> comme réalité mathématique et ne pas piloter l'action sur des résultats mesurés avant la fin de cette phase. Les décisions budgétaires ne doivent pas s'appuyer sur des mesures prématurées.<br><br>
+     L'évaluation doit rester <b>honnête, non biaisée</b>. Tout ajustement post-hoc visant à améliorer les résultats apparents constitue une manipulation.</div></div>
+    <div><div class="modal-term">⚠️ Biais de sélection &amp; écrémage</div>
+     <div class="modal-def">La sélection de candidats déjà proches de l'emploi est un <b>biais éthique et méthodologique grave</b>. Si les bénéficiaires auraient trouvé seuls un emploi, l'impact net est quasi nul et le ROI réel de la politique publique est détruit.<br><br>
+     L'écart de taux de présence en emploi (bénéficiaires − témoins) n'est valide que si les deux populations sont <b>véritablement comparables</b> — même profil, même distance à l'emploi, même conjoncture.</div></div>
+    <div><div class="modal-term">📐 Fourchette de ROI &amp; évaluation anticipée</div>
+     <div class="modal-def">Un horizon de 24 mois <b>n'implique pas d'attendre 24 mois</b>. En formulant des hypothèses raisonnables — durabilité des emplois obtenus, persistance du groupe témoin — il est possible d'anticiper une <b>fourchette de ROI</b> dès une évaluation intermédiaire.<br><br>
+     Cette fourchette doit être présentée comme telle, avec ses hypothèses explicites et ses bornes assumées.</div></div>
+   </div>
+   <div class="modal-note">
+    <p>🌿 <b>Bénéfices non monétisés :</b> le coût social de 41 €/jour ne capture qu'une partie des bénéfices réels. Santé, cohésion sociale et performance des équipes ne sont <b>pas inclus</b> dans le calcul mais constituent des bénéfices réels supplémentaires.</p>
+    <p>⚠️ <b>Limites :</b> les fourchettes constituent un <em>ordre de grandeur</em> utile à la décision, non une mesure certifiée. Une évaluation rigoureuse requiert un groupe témoin constitué <em>ex ante</em> et une collecte longitudinale.</p>
+    <p>📖 <b>Source :</b> cadre d'évaluation des politiques d'emploi des Comités Territoriaux pour l'Emploi.</p>
+   </div>
+  </div>
+ </div>
+</div>
+
+<button class="aide-btn-float" onclick="openAide()" title="Notes de lecture">📚</button>
+
+<!-- HEADER -->
 <header>
-  <div class="badge">Outil d'évaluation d'impact</div>
-  <h1>Simulateur de ROI Social<br>Comités Territoriaux pour l'Emploi</h1>
-  <p>Mesurez le retour sur investissement social de vos actions — pour les demandeurs d'emploi (analyse TPE) ou pour les entreprises (offres pourvues).</p>
+ <div class="badge">Outil d'évaluation d'impact</div>
+ <h1>Simulateur de ROI Social — Comités Territoriaux pour l'Emploi</h1>
+ <p>Mesurez le retour sur investissement social — demandeurs d'emploi (taux de présence en emploi) ou entreprises (offres pourvues).</p>
 </header>
 
-<!-- ════════════════════════════════════════════
-     MODE SWITCHER
-════════════════════════════════════════════ -->
 <nav class="mode-bar">
-  <button class="mode-tab active" id="tab-de" onclick="switchMode('de')">
-    <span class="tab-ico">🧑‍💼</span> Actions — Demandeurs d'emploi
-  </button>
-  <button class="mode-tab" id="tab-ent" onclick="switchMode('ent')">
-    <span class="tab-ico">🏢</span> Actions — Entreprises
-  </button>
+ <button class="mode-tab active" id="tab-de" onclick="switchMode('de')">🧑‍💼 Actions — Demandeurs d'emploi</button>
+ <button class="mode-tab" id="tab-ent" onclick="switchMode('ent')">🏢 Actions — Entreprises</button>
 </nav>
 
-<!-- ════════════════════════════════════════════
-     LAYOUT
-════════════════════════════════════════════ -->
 <div class="wrap">
+ <aside class="sidebar">
 
-  <!-- ══════════ SIDEBAR ══════════ -->
-  <aside class="sidebar">
+  <!-- ─── PANEL DE ─── -->
+  <div class="mode-panel active" id="panel-de">
 
-    <!-- ─── PANEL : DEMANDEURS D'EMPLOI ─── -->
-    <div class="mode-panel active" id="panel-de">
+   <div class="card">
+    <div class="card-hd"><div class="card-hd-icon">📝</div><h2>Description de l'action</h2></div>
+    <div class="card-bd">
+     <div class="field"><label for="de-territoire">Territoire</label><input type="text" id="de-territoire" placeholder="ex. Communauté de communes du Pays Fléchois"></div>
+     <div class="field"><label for="de-titre">Titre de l'action évaluée</label><input type="text" id="de-titre" placeholder="ex. Formation aux métiers de la logistique"></div>
+     <div class="field">
+      <label for="de-desc">Description <span style="font-weight:400">(5 lignes · 500 car.)</span></label>
+      <textarea id="de-desc" rows="5" maxlength="500" placeholder="Objectifs, public cible, modalités…" oninput="document.getElementById('de-desc-count').textContent=this.value.length"></textarea>
+      <div class="char-count"><span id="de-desc-count">0</span>/500</div>
+     </div>
+    </div>
+   </div>
 
-      <!-- Bénéficiaires & Coûts DE -->
-      <div class="card">
-        <div class="card-hd">
-          <div class="card-hd-icon">👥</div>
-          <h2>Bénéficiaires &amp; Coûts</h2>
-        </div>
-        <div class="card-bd">
-          <div class="field">
-            <label for="de-nb">Nombre de bénéficiaires</label>
-            <div class="inp-wrap">
-              <input type="number" id="de-nb" placeholder="ex. 120" min="1">
-              <span class="suffix">pers.</span>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="slabel">Coûts totaux de l'action</div>
-          <div class="cost-grid">
-            <div class="field">
-              <label for="de-c-humain">Moyens humains</label>
-              <div class="inp-wrap"><input type="number" id="de-c-humain" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="field">
-              <label for="de-c-logistique">Logistique</label>
-              <div class="inp-wrap"><input type="number" id="de-c-logistique" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="field">
-              <label for="de-c-prestation">Prestation</label>
-              <div class="inp-wrap"><input type="number" id="de-c-prestation" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="field">
-              <label for="de-c-autres">Autres</label>
-              <div class="inp-wrap"><input type="number" id="de-c-autres" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="cost-total">
-              <span>Coût total</span>
-              <strong id="de-ct-display">0 €</strong>
-            </div>
-          </div>
-          <div class="fixed-box">
-            <div class="fixed-box-title">⚙ Paramètres fixes</div>
-            <div class="fixed-box-rows">
-              <span>Coût conseiller / an : <b>54 500 €</b></span>
-              <span>Coût social 1 j de chômage : <b>41 €</b></span>
-              <span style="font-size:11px;padding-left:4px;">↳ 19 € ind. chômage/RSA · 15 € cotis. · 3 € impôts · 4 € accomp.</span>
-            </div>
-          </div>
-        </div>
+   <div class="card">
+    <div class="card-hd"><div class="card-hd-icon">👥</div><h2>Bénéficiaires &amp; Coûts</h2></div>
+    <div class="card-bd">
+     <div class="field"><label for="de-nb">Nombre de bénéficiaires</label><div class="inp-wrap"><input type="number" id="de-nb" placeholder="ex. 120" min="1"><span class="suffix">pers.</span></div></div>
+     <div class="divider"></div>
+     <div class="slabel">Coûts totaux de l'action</div>
+     <div class="cost-grid">
+      <div class="field"><label for="de-c-humain">Moyens humains</label><div class="inp-wrap"><input type="number" id="de-c-humain" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="field"><label for="de-c-logistique">Logistique</label><div class="inp-wrap"><input type="number" id="de-c-logistique" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="field"><label for="de-c-prestation">Prestation</label><div class="inp-wrap"><input type="number" id="de-c-prestation" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="field"><label for="de-c-autres">Autres</label><div class="inp-wrap"><input type="number" id="de-c-autres" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="cost-total"><span>Coût total</span><strong id="de-ct-display">0 €</strong></div>
+     </div>
+     <div class="fixed-box"><div class="fixed-box-title">⚙ Paramètres fixes</div><div class="fixed-box-rows"><span>Coût conseiller / an : <b>54 500 €</b></span><span>Coût social 1 j de chômage : <b>41 €</b></span><span style="font-size:10px;padding-left:4px">↳ 19 € ind. chômage/RSA · 15 € cotis. · 3 € impôts · 4 € accomp.</span></div></div>
+    </div>
+   </div>
+
+   <div class="card">
+    <div class="card-hd"><div class="card-hd-icon">⚙️</div><h2>Type d'action</h2></div>
+    <div class="card-bd">
+     <div class="radio-row">
+      <div class="radio-opt"><input type="radio" id="de-t-ponc" name="de-atype" value="ponctuelle" checked><label for="de-t-ponc"><span class="ico">⚡</span>Ponctuelle</label></div>
+      <div class="radio-opt"><input type="radio" id="de-t-dur" name="de-atype" value="duree"><label for="de-t-dur"><span class="ico">📅</span>Dans la durée</label></div>
+     </div>
+     <div id="dur-field" class="field" style="margin-top:9px">
+      <label for="de-duree">Durée du dispositif</label>
+      <div class="inp-wrap"><input type="number" id="de-duree" placeholder="ex. 6" min="1"><span class="suffix">mois</span></div>
+      <p class="hint">⚠️ <b>Effet d'enfermement :</b> pendant cette durée, le taux de présence en emploi des bénéficiaires est temporairement pénalisé avant de rattraper puis dépasser le groupe témoin. Ce coût est intégré dans le calcul.</p>
+     </div>
+    </div>
+   </div>
+
+   <div class="card">
+    <div class="card-hd"><div class="card-hd-icon">📊</div><h2>Horizon &amp; Impact</h2></div>
+    <div class="card-bd">
+     <button class="aide-btn" onclick="openAide()">📚 Aide — Notes de lecture</button>
+
+     <div class="field">
+      <label>Horizon d'évaluation du ROI social</label>
+      <div class="horizon-btns">
+       <div class="horizon-btn"><input type="radio" id="h3"  name="de-horizon" value="3" ><label for="h3" ><span class="hval">3</span><span class="hunit">mois</span></label></div>
+       <div class="horizon-btn"><input type="radio" id="h6"  name="de-horizon" value="6" ><label for="h6" ><span class="hval">6</span><span class="hunit">mois</span></label></div>
+       <div class="horizon-btn"><input type="radio" id="h12" name="de-horizon" value="12" checked><label for="h12"><span class="hval">12</span><span class="hunit">mois</span></label></div>
+       <div class="horizon-btn"><input type="radio" id="h24" name="de-horizon" value="24"><label for="h24"><span class="hval">24</span><span class="hunit">mois</span></label></div>
+       <div class="horizon-btn"><input type="radio" id="h36" name="de-horizon" value="36"><label for="h36"><span class="hval">36</span><span class="hunit">mois</span></label></div>
       </div>
-
-      <!-- Type d'action DE -->
-      <div class="card">
-        <div class="card-hd">
-          <div class="card-hd-icon">⚙️</div>
-          <h2>Type d'action</h2>
-        </div>
-        <div class="card-bd">
-          <div class="radio-row">
-            <div class="radio-opt">
-              <input type="radio" id="de-t-ponc" name="de-atype" value="ponctuelle" checked>
-              <label for="de-t-ponc"><span class="ico">⚡</span>Ponctuelle</label>
-            </div>
-            <div class="radio-opt">
-              <input type="radio" id="de-t-dur" name="de-atype" value="duree">
-              <label for="de-t-dur"><span class="ico">📅</span>Dans la durée</label>
-            </div>
-          </div>
-          <div id="dur-field" class="field" style="margin-top:12px;">
-            <label for="de-duree">Durée de l'action</label>
-            <div class="inp-wrap">
-              <input type="number" id="de-duree" placeholder="ex. 6" min="1">
-              <span class="suffix">mois</span>
-            </div>
-            <p class="hint">⚠️ <b>Effet d'enfermement :</b> pendant la durée du dispositif, les bénéficiaires sont partiellement indisponibles pour l'emploi. Leur TPE sera pénalisé sur cette période avant de rattraper puis dépasser la référence.</p>
-          </div>
-        </div>
+      <p class="hint" id="horizon-desc-hint" style="margin-bottom:5px"></p>
+      <div class="horizon-note">
+       <p>⏱ <b>L'horizon doit tenir compte de la durée du dispositif</b> et des effets d'enfermement. Une formation de 6 mois requiert un horizon bien plus lointain qu'un atelier de 2 jours.</p>
+       <p>🔭 <b>Un horizon de 24 mois n'implique pas d'attendre 24 mois.</b> Des hypothèses raisonnables permettent d'<b>anticiper une fourchette de ROI</b> dès une évaluation intermédiaire.</p>
+       <p>📐 <b>L'horizon doit être suffisamment lointain</b> pour que les effets d'enfermement soient atténués et que la suite du parcours ne soit plus corrélée à l'action.</p>
       </div>
+     </div>
 
-      <!-- TPE DE -->
-      <div class="card">
-        <div class="card-hd">
-          <div class="card-hd-icon">📊</div>
-          <h2>Taux de Présence en Emploi</h2>
-        </div>
-        <div class="card-bd">
-          <div class="field">
-            <label for="de-horizon">Horizon d'observation</label>
-            <div class="inp-wrap">
-              <input type="number" id="de-horizon" placeholder="ex. 12" min="1" max="60" value="12">
-              <span class="suffix">mois</span>
-            </div>
-          </div>
-          <div class="field">
-            <label for="de-tpe-obs">TPE observé — population bénéficiaire</label>
-            <div class="inp-wrap">
-              <input type="number" id="de-tpe-obs" placeholder="ex. 52" min="0" max="100">
-              <span class="suffix">%</span>
-            </div>
-            <p class="hint">Repères : accompagnement PE <b>45–55 %</b> à 6 mois · formation certifiante <b>60–70 %</b> à 12 mois · remobilisation <b>25–35 %</b> à 6 mois</p>
-          </div>
-          <div class="field">
-            <label for="de-tpe-ref">TPE de référence — population témoin</label>
-            <div class="inp-wrap">
-              <input type="number" id="de-tpe-ref" placeholder="ex. 38" min="0" max="100">
-              <span class="suffix">%</span>
-            </div>
-            <p class="hint">Repère DARES demandeurs d'emploi comparables : <b>30–40 %</b> à 6 mois</p>
-          </div>
-        </div>
+     <div class="divider"></div>
+
+     <div class="field">
+      <label>Écart de taux de présence en emploi — bénéficiaires − témoins (points)</label>
+      <div class="slider-wrap">
+       <input type="range" id="de-ecart-slider" min="-5" max="10" step="0.5" value="2" oninput="updateEcartUI()">
+       <div class="slider-labels"><span style="color:var(--red)">−5 pp</span><span>0</span><span>+5</span><span style="color:var(--green)">+10 pp</span></div>
       </div>
-
-      <button class="btn-calc" onclick="calculateDE()">
-        Calculer le ROI Social <span class="arr">→</span>
-      </button>
-
-    </div><!-- /#panel-de -->
-
-    <!-- ─── PANEL : ENTREPRISES ─── -->
-    <div class="mode-panel" id="panel-ent">
-
-      <div class="info-box">
-        <b>Mode Entreprises :</b> ce simulateur mesure l'impact d'actions qui ont permis de pourvoir des offres d'emploi qui <b>n'auraient pas été pourvues</b> en l'absence d'intervention du comité territorial (tensions de recrutement, secteur/métier en difficulté…).
+      <div id="ecart-badge" class="ecart-badge">
+       <span id="ecart-badge-ico">🔵</span>
+       <span id="ecart-badge-val" class="ecart-val">+2,0</span>
+       <span id="ecart-badge-label">points — Intermédiaire</span>
       </div>
+      <p class="hint" style="margin-top:6px">📌 <i>Niveau de taux de présence en emploi observé ou prévu à l'horizon défini ci-dessus. La fourchette ROI utilise la plage du niveau sélectionné.</i></p>
+     </div>
 
-      <!-- Offres & Contrats -->
-      <div class="card">
-        <div class="card-hd">
-          <div class="card-hd-icon teal">🏢</div>
-          <h2 class="teal">Offres pourvues &amp; Contrats</h2>
-        </div>
-        <div class="card-bd">
-          <div class="field">
-            <label for="ent-offres-tot">Offres supplémentaires pourvues grâce à l'action</label>
-            <div class="inp-wrap">
-              <input type="number" class="teal-focus" id="ent-offres-tot" placeholder="ex. 40" min="1">
-              <span class="suffix">offres</span>
-            </div>
-            <p class="hint">Nombre d'offres qui <b class="teal">n'auraient pas été pourvues</b> sans l'intervention du comité.</p>
-          </div>
-          <div class="sub-field">
-            <div class="field" style="margin-bottom:0;">
-              <label for="ent-offres-de">Dont offres pourvues par des demandeurs d'emploi</label>
-              <div class="inp-wrap">
-                <input type="number" class="teal-focus" id="ent-offres-de" placeholder="ex. 28" min="0">
-                <span class="suffix">offres</span>
-              </div>
-              <p class="hint">Seules ces offres génèrent une réduction de chômage — base du calcul du ROI.</p>
-            </div>
-          </div>
-          <div class="field">
-            <label for="ent-duree-contrat">Durée moyenne des contrats correspondants</label>
-            <div class="inp-wrap">
-              <input type="number" class="teal-focus" id="ent-duree-contrat" placeholder="ex. 12" min="1">
-              <span class="suffix">mois</span>
-            </div>
-            <p class="hint">Repères : CDD court <b>1–3 mois</b> · CDD long <b>6–12 mois</b> · CDI (horizon de référence) <b>24 mois</b></p>
-          </div>
-        </div>
+     <div class="divider"></div>
+
+     <div class="field">
+      <label>Délai de stabilisation de l'impact (mois)</label>
+      <div class="slider-wrap">
+       <input type="range" id="de-stab-slider" min="1" max="35" step="1" value="9" oninput="updateStabUI()">
+       <div class="slider-labels"><span>1 m</span><span>12</span><span>24</span><span>35 m</span></div>
       </div>
+      <div class="stab-badge" id="stab-badge">Au bout de <b>9 mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>12<sup>e</sup> mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.</div>
+     </div>
+    </div>
+   </div>
 
-      <!-- Coûts Entreprises -->
-      <div class="card">
-        <div class="card-hd">
-          <div class="card-hd-icon teal">💶</div>
-          <h2 class="teal">Coûts de l'action</h2>
-        </div>
-        <div class="card-bd">
-          <div class="cost-grid">
-            <div class="field">
-              <label for="ent-c-humain">Moyens humains</label>
-              <div class="inp-wrap"><input type="number" class="teal-focus" id="ent-c-humain" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="field">
-              <label for="ent-c-logistique">Logistique</label>
-              <div class="inp-wrap"><input type="number" class="teal-focus" id="ent-c-logistique" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="field">
-              <label for="ent-c-prestation">Prestation</label>
-              <div class="inp-wrap"><input type="number" class="teal-focus" id="ent-c-prestation" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="field">
-              <label for="ent-c-autres">Autres</label>
-              <div class="inp-wrap"><input type="number" class="teal-focus" id="ent-c-autres" placeholder="0" min="0"><span class="suffix">€</span></div>
-            </div>
-            <div class="cost-total">
-              <span>Coût total</span>
-              <strong id="ent-ct-display">0 €</strong>
-            </div>
-          </div>
-          <div class="fixed-box teal">
-            <div class="fixed-box-title teal">⚙ Paramètres fixes</div>
-            <div class="fixed-box-rows">
-              <span>Coût social 1 j de chômage : <b>41 €</b></span>
-              <span style="font-size:11px;padding-left:4px;">↳ 19 € ind./RSA · 15 € cotis. · 3 € impôts · 4 € accomp.</span>
-              <span style="margin-top:2px;">1 mois = <b>30,5 jours</b></span>
-            </div>
-          </div>
+   <button class="btn-calc" onclick="calculateDE()">Calculer le ROI Social <span class="arr">→</span></button>
 
-          <div class="formula-box">
-            <div class="formula-title">📐 Formule ROI entreprises</div>
-            <code>ROI = (offres DE × durée × 30,5 × 41 € − coût total) / coût total</code>
-          </div>
-        </div>
-      </div>
+  </div><!-- /#panel-de -->
 
-      <button class="btn-calc teal" onclick="calculateENT()">
-        Calculer le ROI Social <span class="arr">→</span>
-      </button>
+  <!-- ─── PANEL ENT ─── -->
+  <div class="mode-panel" id="panel-ent">
+   <div class="info-box"><b>Mode Entreprises :</b> actions ayant permis de pourvoir des offres qui <b>n'auraient pas été pourvues</b> sans intervention.</div>
+   <div class="card">
+    <div class="card-hd"><div class="card-hd-icon teal">📝</div><h2 class="teal">Description de l'action</h2></div>
+    <div class="card-bd">
+     <div class="field"><label for="ent-territoire">Territoire</label><input type="text" id="ent-territoire" placeholder="ex. Bassin d'emploi de Tours Nord"></div>
+     <div class="field"><label for="ent-titre">Titre</label><input type="text" id="ent-titre" placeholder="ex. Forum emploi logistique &amp; industrie"></div>
+     <div class="field"><label for="ent-desc">Description <span style="font-weight:400">(500 car.)</span></label><textarea id="ent-desc" rows="4" maxlength="500" placeholder="Secteurs ciblés, modalités…" oninput="document.getElementById('ent-desc-count').textContent=this.value.length"></textarea><div class="char-count"><span id="ent-desc-count">0</span>/500</div></div>
+    </div>
+   </div>
+   <div class="card">
+    <div class="card-hd"><div class="card-hd-icon teal">🏢</div><h2 class="teal">Offres pourvues &amp; Contrats</h2></div>
+    <div class="card-bd">
+     <div class="field"><label for="ent-offres-tot">Offres supplémentaires pourvues grâce à l'action</label><div class="inp-wrap"><input type="number" id="ent-offres-tot" placeholder="ex. 40" min="1"><span class="suffix">offres</span></div><p class="hint">Offres qui <b>n'auraient pas été pourvues</b> sans intervention.</p></div>
+     <div class="sub-field"><div class="field" style="margin-bottom:0"><label for="ent-offres-de">Dont offres pourvues par des demandeurs d'emploi</label><div class="inp-wrap"><input type="number" id="ent-offres-de" placeholder="ex. 28" min="0"><span class="suffix">offres</span></div><p class="hint">Seules ces offres entrent dans le calcul du ROI.</p></div></div>
+     <div class="field"><label for="ent-duree-contrat">Durée moyenne des contrats</label><div class="inp-wrap"><input type="number" id="ent-duree-contrat" placeholder="ex. 12" min="1"><span class="suffix">mois</span></div><p class="hint">CDD court <b>1–3 m</b> · CDD long <b>6–12 m</b> · CDI <b>24 m</b></p></div>
+    </div>
+   </div>
+   <div class="card">
+    <div class="card-hd"><div class="card-hd-icon teal">💶</div><h2 class="teal">Coûts de l'action</h2></div>
+    <div class="card-bd">
+     <div class="cost-grid">
+      <div class="field"><label for="ent-c-humain">Moyens humains</label><div class="inp-wrap"><input type="number" id="ent-c-humain" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="field"><label for="ent-c-logistique">Logistique</label><div class="inp-wrap"><input type="number" id="ent-c-logistique" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="field"><label for="ent-c-prestation">Prestation</label><div class="inp-wrap"><input type="number" id="ent-c-prestation" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="field"><label for="ent-c-autres">Autres</label><div class="inp-wrap"><input type="number" id="ent-c-autres" placeholder="0" min="0"><span class="suffix">€</span></div></div>
+      <div class="cost-total"><span>Coût total</span><strong id="ent-ct-display">0 €</strong></div>
+     </div>
+     <div class="fixed-box teal"><div class="fixed-box-title teal">⚙ Paramètres fixes</div><div class="fixed-box-rows"><span>Coût social 1 j de chômage : <b>41 €</b></span><span style="font-size:10px;padding-left:4px">↳ 19 € ind./RSA · 15 € cotis. · 3 € impôts · 4 € accomp.</span><span>1 mois = <b>30,5 jours</b></span></div></div>
+     <div class="formula-box"><div class="formula-title">📐 Formule ROI entreprises</div><code>ROI = (offres DE × durée × 30,5 × 41 € − coût) / coût</code></div>
+    </div>
+   </div>
+   <button class="btn-calc teal" onclick="calculateENT()">Calculer le ROI Social <span class="arr">→</span></button>
+  </div>
 
-    </div><!-- /#panel-ent -->
+ </aside>
 
-  </aside><!-- /sidebar -->
+ <!-- ══════ RESULTS ══════ -->
+ <div class="results">
 
-  <!-- ══════════ RESULTS ══════════ -->
-  <div class="results">
+  <div id="empty" class="card"><div class="card-bd"><div class="big-icon">📈</div><h3>Renseignez les paramètres pour simuler</h3><p>Complétez le formulaire puis cliquez sur <strong>« Calculer le ROI Social »</strong></p></div></div>
 
-    <!-- État initial -->
-    <div id="empty" class="card">
-      <div class="card-bd">
-        <div class="big-icon">📈</div>
-        <h3>Renseignez les paramètres pour simuler</h3>
-        <p>Choisissez un mode (Demandeurs d'emploi ou Entreprises),<br>complétez le formulaire puis cliquez sur <strong>« Calculer le ROI Social »</strong></p>
-      </div>
+  <!-- ─── RÉSULTATS DE ─── -->
+  <div id="res-de">
+   <div class="print-bar"><button class="print-btn" onclick="window.print()">🖨️ Imprimer / PDF (A4 — 2 pages)</button></div>
+
+   <div class="action-header">
+    <div class="action-header-meta">
+     <span class="action-territoire" id="res-de-territoire" contenteditable="true" data-placeholder="Territoire"></span>
+     <span class="action-horizon-badge" id="res-de-horizon-badge"></span>
+    </div>
+    <div class="action-titre" id="res-de-titre" contenteditable="true" data-placeholder="Titre de l'action">Action non nommée</div>
+    <div class="action-desc" id="res-de-desc" contenteditable="true" data-placeholder="Description de l'action…"></div>
+    <div class="edit-hint">✏️ Cliquez sur le titre, le territoire ou la description pour les modifier directement</div>
+   </div>
+
+   <div class="kpi-row">
+    <div class="kpi c-cost"><div class="kpi-bg-icon">💶</div><div class="kpi-label">Coût total de l'action</div><div class="kpi-val" id="de-kpi-cost">—</div><div class="kpi-sub" id="de-kpi-cpb"></div></div>
+    <div class="kpi c-days"><div class="kpi-bg-icon">📅</div><div class="kpi-label">Jours de chômage évités</div><div class="kpi-val" id="de-kpi-days">—</div><div class="kpi-sub" id="de-kpi-dpb"></div></div>
+    <div class="kpi c-roi" id="de-kpi-roi-card"><div class="kpi-bg-icon">📊</div><div class="kpi-label">ROI Social (fourchette)</div><div class="kpi-val" id="de-kpi-roi">—</div><div class="kpi-sub" id="de-kpi-roi-rng"></div></div>
+   </div>
+
+   <div class="chart-card">
+    <div class="chart-ttl">Évolution du Différentiel d'Impact — Taux de présence en emploi*</div>
+    <div class="chart-sub">Écart bénéficiaires − témoins (points de %) · bleu = gain positif · rouge = gain négatif · trait pointillé = référence zéro</div>
+    <div class="ch-wrap" style="height:255px"><canvas id="de-ch-tpe"></canvas></div>
+    <div class="chart-footnote">* <b>Taux de présence en emploi (TPE)</b> : part des bénéficiaires (ou témoins) en emploi à la date de mesure. L'écart bénéficiaires − témoins mesure l'effet net de l'action, indépendamment de la conjoncture.</div>
+   </div>
+
+   <div class="chart-card">
+    <div class="chart-ttl">Bénéfice social vs Coût de l'action — Fourchette</div>
+    <div class="chart-sub">Valeur totale des jours évités × 41 €/j · fourchette basse, centrale et haute selon la plage d'écart</div>
+    <div class="ch-wrap" style="height:165px"><canvas id="de-ch-roi"></canvas></div>
+   </div>
+
+   <div class="interp">
+    <div class="interp-hd"><div class="card-hd-icon" style="width:26px;height:26px;font-size:12px">💡</div><h3>Interprétation</h3></div>
+    <div class="interp-txt" id="de-interp"></div>
+   </div>
+
+   <div class="non-monetise">
+    <div class="non-monetise-title">🌿 Bénéfices non monétisés — Au-delà des 41 €/jour</div>
+    <p style="font-size:11.5px;color:var(--muted);margin-bottom:8px">Le coût social du chômage de <b>41 €/jour</b> ne capture qu'une partie des bénéfices réels. Les effets suivants ne sont <b>pas inclus</b> dans ce simulateur :</p>
+    <div class="non-monetise-items">
+     <div class="nm-item"><b>🏥 Santé</b>Le retour à l'emploi réduit les soins liés au stress chronique, à l'anxiété et à la dépression.</div>
+     <div class="nm-item"><b>🤝 Cohésion sociale</b>L'intégration professionnelle réduit les coûts liés à l'exclusion et aux tensions sociales.</div>
+     <div class="nm-item"><b>💪 Performance équipes</b>Les conseillers observant des trajectoires durables sont plus engagés — bénéfice organisationnel non monétisé.</div>
+    </div>
+   </div>
+
+   <!-- PAGE 2 à l'impression -->
+   <div class="print-page2">
+
+    <div class="method">
+     <h3>Méthodologie &amp; décomposition</h3>
+     <div class="method-grid">
+      <div class="method-item"><div class="method-dot"></div><p><b>Courbe différentielle</b> : modélisation mois par mois de l'écart de taux de présence en emploi, de 0 vers la valeur cible au délai de stabilisation, puis plateau jusqu'à l'horizon.</p></div>
+      <div class="method-item"><div class="method-dot"></div><p><b>Effet d'enfermement</b> : pendant la durée du dispositif, le différentiel de taux de présence en emploi est temporairement négatif (−25 % de l'écart cible). Ce coût est comptabilisé dans l'intégrale.</p></div>
+      <div class="method-item"><div class="method-dot"></div><p><b>Jours évités</b> : intégrale trapézoïdale du différentiel × N bénéficiaires × 30,5 j/mois × 41 €/j.</p></div>
+      <div class="method-item"><div class="method-dot"></div><p><b>Fourchette ROI</b> : calculée sur la borne basse et haute de la plage d'écart de taux de présence en emploi correspondant au niveau sélectionné.</p></div>
+     </div>
+     <div class="decomp-section-title">Coût social d'un jour de chômage</div>
+     <div class="decomp-row">
+      <div class="decomp-item"><div class="dval">19 €</div><div class="dlabel">Indemnisation chômage + RSA</div></div>
+      <div class="decomp-item"><div class="dval">15 €</div><div class="dlabel">Cotisations salariales non perçues</div></div>
+      <div class="decomp-item"><div class="dval">3 €</div><div class="dlabel">Impôts &amp; taxes non perçus</div></div>
+      <div class="decomp-item"><div class="dval">4 €</div><div class="dlabel">Coût d'accompagnement</div></div>
+     </div>
     </div>
 
-    <!-- ─── RÉSULTATS DE ─── -->
-    <div id="res-de">
-      <div class="kpi-row">
-        <div class="kpi c-cost">
-          <div class="kpi-bg-icon">💶</div>
-          <div class="kpi-label">Coût total de l'action</div>
-          <div class="kpi-val" id="de-kpi-cost">—</div>
-          <div class="kpi-sub" id="de-kpi-cpb"></div>
-        </div>
-        <div class="kpi c-days">
-          <div class="kpi-bg-icon">📅</div>
-          <div class="kpi-label">Jours de chômage évités</div>
-          <div class="kpi-val" id="de-kpi-days">—</div>
-          <div class="kpi-sub" id="de-kpi-dpb"></div>
-        </div>
-        <div class="kpi c-roi" id="de-kpi-roi-card">
-          <div class="kpi-bg-icon">📊</div>
-          <div class="kpi-label">ROI Social (fourchette)</div>
-          <div class="kpi-val" id="de-kpi-roi">—</div>
-          <div class="kpi-sub" id="de-kpi-roi-rng"></div>
-        </div>
-      </div>
+    <div class="glossary">
+     <div class="glossary-hd"><span style="font-size:19px">📚</span><h3>Notes de lecture — Concepts clés de l'évaluation</h3></div>
+     <div class="glossary-grid">
+      <div><div class="glossary-term">🔒 Effet d'enfermement (lock-in)</div><div class="glossary-def">Pendant la durée d'un dispositif, le <b>taux de présence en emploi</b> des bénéficiaires peut être <b>temporairement inférieur</b> à celui du groupe témoin. Ce coût temporaire précède le gain attendu. Le décideur ne doit pas interrompre l'action sur des chiffres négatifs à mi-parcours.<br><em style="font-size:10px">Analogie F1 : le pilote rentre au stand (coût temporaire) mais ressort avec des pneus neufs pour dépasser définitivement ses adversaires.</em></div></div>
+      <div><div class="glossary-term">⚖️ Honnêteté &amp; neutralité</div><div class="glossary-def">L'évaluateur doit <b>accepter l'effet d'enfermement</b> comme réalité mathématique. Tout ajustement post-hoc pour améliorer les résultats apparents du taux de présence en emploi constitue une manipulation éthique.</div></div>
+      <div><div class="glossary-term">⚠️ Biais de sélection &amp; écrémage</div><div class="glossary-def">La sélection de candidats déjà proches de l'emploi détruit le ROI réel. L'écart de taux de présence en emploi (bénéficiaires − témoins) n'est valide que si les deux populations sont <b>véritablement comparables</b>.</div></div>
+      <div><div class="glossary-term">📐 Fourchette &amp; évaluation anticipée</div><div class="glossary-def">Un horizon de 24 mois <b>n'implique pas d'attendre 24 mois</b>. Des hypothèses raisonnables permettent d'anticiper une <b>fourchette de ROI</b> dès une évaluation intermédiaire du taux de présence en emploi.</div></div>
+     </div>
+     <div class="glossary-note">
+      <p>⚠️ <b>Limites :</b> les fourchettes constituent un <em>ordre de grandeur</em> utile à la décision, non une mesure certifiée. Une évaluation rigoureuse requiert un groupe témoin constitué <em>ex ante</em>.</p>
+      <p>📖 <b>Source :</b> cadre d'évaluation des politiques d'emploi des Comités Territoriaux pour l'Emploi.</p>
+     </div>
+    </div>
 
-      <div class="chart-card">
-        <div class="chart-ttl">Évolution du Taux de Présence en Emploi</div>
-        <div class="chart-sub">Bénéficiaires vs population de référence — zone bleue : fourchette d'incertitude ±20 %</div>
-        <div class="ch-wrap" style="height:280px;"><canvas id="de-ch-tpe"></canvas></div>
-      </div>
+    <div class="complements-card">
+     <h3>📝 Compléments d'analyse</h3>
+     <p style="font-size:11.5px;color:var(--muted);margin-bottom:9px">Zone libre pour notes, hypothèses retenues, contexte local, réserves méthodologiques ou observations complémentaires.</p>
+     <textarea placeholder="Saisissez ici vos compléments d'analyse, les hypothèses retenues, le contexte local ou les réserves éventuelles…"></textarea>
+    </div>
 
-      <div class="chart-card">
-        <div class="chart-ttl">Différentiel mensuel de TPE</div>
-        <div class="chart-sub">
-          <span style="color:var(--green);font-weight:600;">■ Vert</span> = gain mensuel &nbsp;|&nbsp;
-          <span style="color:var(--red);font-weight:600;">■ Rouge</span> = effet d'enfermement (coût temporaire)
-        </div>
-        <div class="ch-wrap" style="height:210px;"><canvas id="de-ch-diff"></canvas></div>
-      </div>
+   </div><!-- /.print-page2 -->
+  </div><!-- /#res-de -->
 
-      <div class="chart-card">
-        <div class="chart-ttl">Bénéfice social vs Coût de l'action</div>
-        <div class="chart-sub">Valeur totale des jours évités (N × jours × 41 €) vs coût engagé</div>
-        <div class="ch-wrap" style="height:160px;"><canvas id="de-ch-roi"></canvas></div>
-      </div>
+  <!-- ─── RÉSULTATS ENT ─── -->
+  <div id="res-ent">
+   <div class="print-bar"><button class="print-btn" onclick="window.print()">🖨️ Imprimer / PDF (A4)</button></div>
+   <div class="action-header">
+    <div class="action-header-meta"><span class="action-territoire" id="res-ent-territoire" contenteditable="true" data-placeholder="Territoire"></span></div>
+    <div class="action-titre" id="res-ent-titre" contenteditable="true" data-placeholder="Titre de l'action">Action non nommée</div>
+    <div class="action-desc" id="res-ent-desc" contenteditable="true" data-placeholder="Description…"></div>
+    <div class="edit-hint">✏️ Cliquez pour modifier directement</div>
+   </div>
+   <div class="kpi-row">
+    <div class="kpi c-offres"><div class="kpi-bg-icon">📋</div><div class="kpi-label">Offres pourvues à des DE</div><div class="kpi-val" id="ent-kpi-offres">—</div><div class="kpi-sub" id="ent-kpi-offres-sub"></div></div>
+    <div class="kpi c-days"><div class="kpi-bg-icon">📅</div><div class="kpi-label">Jours de chômage évités</div><div class="kpi-val" id="ent-kpi-days">—</div><div class="kpi-sub" id="ent-kpi-days-sub"></div></div>
+    <div class="kpi c-roi" id="ent-kpi-roi-card"><div class="kpi-bg-icon">📊</div><div class="kpi-label">ROI Social</div><div class="kpi-val" id="ent-kpi-roi">—</div><div class="kpi-sub" id="ent-kpi-roi-sub"></div></div>
+   </div>
+   <div class="kpi-row-2">
+    <div class="kpi c-benefice" id="ent-kpi-benef-card"><div class="kpi-bg-icon">💰</div><div class="kpi-label">Bénéfice social brut</div><div class="kpi-val" id="ent-kpi-benef">—</div><div class="kpi-sub" id="ent-kpi-benef-sub"></div></div>
+    <div class="kpi c-cost"><div class="kpi-bg-icon">💶</div><div class="kpi-label">Coût total de l'action</div><div class="kpi-val" id="ent-kpi-cost">—</div><div class="kpi-sub" id="ent-kpi-cost-sub"></div></div>
+   </div>
+   <div class="chart-card"><div class="chart-ttl">Répartition des offres pourvues</div><div class="chart-sub">Demandeurs d'emploi vs autres candidats — seules les offres DE entrent dans le ROI</div><div class="ch-wrap" style="height:175px"><canvas id="ent-ch-offres"></canvas></div></div>
+   <div class="chart-card"><div class="chart-ttl">Bénéfice social vs Coût de l'action</div><div class="chart-sub">Offres DE × durée × 30,5 j × 41 €/j vs coût total</div><div class="ch-wrap" style="height:155px"><canvas id="ent-ch-roi"></canvas></div></div>
+   <div class="interp"><div class="interp-hd"><div class="card-hd-icon teal" style="width:26px;height:26px;font-size:12px">💡</div><h3>Interprétation</h3></div><div class="interp-txt" id="ent-interp"></div></div>
+   <div class="method">
+    <h3>Méthodologie — Actions entreprises</h3>
+    <div class="method-grid">
+     <div class="method-item"><div class="method-dot teal"></div><p><b>Addictionnalité</b> : seules les offres qui <b>n'auraient pas été pourvues</b> sans intervention sont comptabilisées.</p></div>
+     <div class="method-item"><div class="method-dot teal"></div><p><b>Calcul</b> : offres DE × durée × 30,5 j × 41 €/j. Pas d'effet d'enfermement pour les actions entreprises.</p></div>
+    </div>
+    <div class="decomp-section-title">Coût social d'un jour de chômage</div>
+    <div class="decomp-row">
+     <div class="decomp-item"><div class="dval">19 €</div><div class="dlabel">Indemnisation chômage + RSA</div></div>
+     <div class="decomp-item"><div class="dval">15 €</div><div class="dlabel">Cotisations salariales non perçues</div></div>
+     <div class="decomp-item"><div class="dval">3 €</div><div class="dlabel">Impôts &amp; taxes non perçus</div></div>
+     <div class="decomp-item"><div class="dval">4 €</div><div class="dlabel">Coût d'accompagnement</div></div>
+    </div>
+   </div>
+   <div class="complements-card">
+    <h3>📝 Compléments d'analyse</h3>
+    <p style="font-size:11.5px;color:var(--muted);margin-bottom:9px">Zone libre pour notes, hypothèses, contexte local ou réserves méthodologiques.</p>
+    <textarea placeholder="Compléments d'analyse…"></textarea>
+   </div>
+  </div><!-- /#res-ent -->
 
-      <div class="interp">
-        <div class="interp-hd">
-          <div class="card-hd-icon" style="width:28px;height:28px;font-size:13px;">💡</div>
-          <h3>Interprétation</h3>
-        </div>
-        <div class="interp-txt" id="de-interp"></div>
-      </div>
-
-      <div class="method">
-        <h3>Méthodologie &amp; décomposition du coût social du chômage</h3>
-        <div class="method-grid">
-          <div class="method-item"><div class="method-dot"></div>
-            <p><b>Courbes TPE</b> : saturation exponentielle normalisée, f(0)=0 %, f(T)=valeur cible.</p></div>
-          <div class="method-item"><div class="method-dot"></div>
-            <p><b>Enfermement</b> : TPE limité à <b>25 %</b> du niveau de référence pendant la durée du dispositif.</p></div>
-          <div class="method-item"><div class="method-dot"></div>
-            <p><b>Jours évités</b> : intégrale (trapèzes) du différentiel TPE × N bénéficiaires × 30,5 j/mois.</p></div>
-          <div class="method-item"><div class="method-dot"></div>
-            <p><b>Fourchette ROI</b> : ±20 % sur le différentiel TPE (incertitude d'attribution causale).</p></div>
-        </div>
-        <div class="decomp-row">
-          <div class="decomp-item"><div class="dval">19 €</div><div class="dlabel">Indemnisation chômage + RSA</div></div>
-          <div class="decomp-item"><div class="dval">15 €</div><div class="dlabel">Cotisations salariales non perçues</div></div>
-          <div class="decomp-item"><div class="dval">3 €</div><div class="dlabel">Impôts &amp; taxes non perçus</div></div>
-          <div class="decomp-item"><div class="dval">4 €</div><div class="dlabel">Coût d'accompagnement</div></div>
-        </div>
-      </div>
-    </div><!-- /#res-de -->
-
-    <!-- ─── RÉSULTATS ENTREPRISES ─── -->
-    <div id="res-ent">
-
-      <!-- KPI row entreprises -->
-      <div class="kpi-row">
-        <div class="kpi c-offres">
-          <div class="kpi-bg-icon">📋</div>
-          <div class="kpi-label">Offres pourvues à des DE</div>
-          <div class="kpi-val" id="ent-kpi-offres">—</div>
-          <div class="kpi-sub" id="ent-kpi-offres-sub"></div>
-        </div>
-        <div class="kpi c-days">
-          <div class="kpi-bg-icon">📅</div>
-          <div class="kpi-label">Jours de chômage évités</div>
-          <div class="kpi-val" id="ent-kpi-days">—</div>
-          <div class="kpi-sub" id="ent-kpi-days-sub"></div>
-        </div>
-        <div class="kpi c-roi" id="ent-kpi-roi-card">
-          <div class="kpi-bg-icon">📊</div>
-          <div class="kpi-label">ROI Social</div>
-          <div class="kpi-val" id="ent-kpi-roi">—</div>
-          <div class="kpi-sub" id="ent-kpi-roi-sub"></div>
-        </div>
-      </div>
-
-      <!-- Détail bénéfice -->
-      <div class="kpi-row-2">
-        <div class="kpi c-benefice" id="ent-kpi-benef-card">
-          <div class="kpi-bg-icon">💰</div>
-          <div class="kpi-label">Bénéfice social brut</div>
-          <div class="kpi-val" id="ent-kpi-benef">—</div>
-          <div class="kpi-sub" id="ent-kpi-benef-sub"></div>
-        </div>
-        <div class="kpi c-cost">
-          <div class="kpi-bg-icon">💶</div>
-          <div class="kpi-label">Coût total de l'action</div>
-          <div class="kpi-val" id="ent-kpi-cost">—</div>
-          <div class="kpi-sub" id="ent-kpi-cost-sub"></div>
-        </div>
-      </div>
-
-      <!-- Chart : offres totales vs DE -->
-      <div class="chart-card">
-        <div class="chart-ttl">Répartition des offres pourvues</div>
-        <div class="chart-sub">Offres pourvues à des demandeurs d'emploi vs autres candidats — seules les offres DE entrent dans le calcul du ROI</div>
-        <div class="ch-wrap" style="height:200px;"><canvas id="ent-ch-offres"></canvas></div>
-      </div>
-
-      <!-- Chart : jours évités par contrat -->
-      <div class="chart-card">
-        <div class="chart-ttl">Jours de chômage évités — décomposition</div>
-        <div class="chart-sub">Détail par offre DE : jours évités = durée contrat × 30,5 j/mois</div>
-        <div class="ch-wrap" style="height:180px;"><canvas id="ent-ch-jours"></canvas></div>
-      </div>
-
-      <!-- Chart : coût vs bénéfice -->
-      <div class="chart-card">
-        <div class="chart-ttl">Bénéfice social vs Coût de l'action</div>
-        <div class="chart-sub">Valeur monétaire totale des jours évités (offres DE × durée × 30,5 × 41 €) vs coût engagé</div>
-        <div class="ch-wrap" style="height:160px;"><canvas id="ent-ch-roi"></canvas></div>
-      </div>
-
-      <div class="interp">
-        <div class="interp-hd">
-          <div class="card-hd-icon teal" style="width:28px;height:28px;font-size:13px;">💡</div>
-          <h3>Interprétation</h3>
-        </div>
-        <div class="interp-txt" id="ent-interp"></div>
-      </div>
-
-      <div class="method">
-        <h3>Méthodologie — Actions entreprises</h3>
-        <div class="method-grid">
-          <div class="method-item"><div class="method-dot teal"></div>
-            <p><b>Principe de base</b> : seules les offres pourvues à des demandeurs d'emploi génèrent une réduction directe du chômage.</p></div>
-          <div class="method-item"><div class="method-dot teal"></div>
-            <p><b>Addictionnalité</b> : les offres prises en compte sont celles qui <b>n'auraient pas été pourvues</b> sans l'intervention — effet net uniquement.</p></div>
-          <div class="method-item"><div class="method-dot teal"></div>
-            <p><b>Calcul du bénéfice</b> : offres DE × durée (mois) × 30,5 j × 41 €/j. Pas d'effet d'enfermement pour les actions entreprises.</p></div>
-          <div class="method-item"><div class="method-dot teal"></div>
-            <p><b>Formule ROI</b> : (bénéfice brut − coût total) / coût total. ROI = 1 × signifie que chaque euro investi rapporte 1 € net.</p></div>
-        </div>
-        <div class="decomp-row">
-          <div class="decomp-item"><div class="dval">19 €</div><div class="dlabel">Indemnisation chômage + RSA</div></div>
-          <div class="decomp-item"><div class="dval">15 €</div><div class="dlabel">Cotisations salariales non perçues</div></div>
-          <div class="decomp-item"><div class="dval">3 €</div><div class="dlabel">Impôts &amp; taxes non perçus</div></div>
-          <div class="decomp-item"><div class="dval">4 €</div><div class="dlabel">Coût d'accompagnement</div></div>
-        </div>
-      </div>
-
-    </div><!-- /#res-ent -->
-
-  </div><!-- /.results -->
+ </div><!-- /.results -->
 </div><!-- /.wrap -->
 
-<!-- ════════════════════════════════════════════
-     JAVASCRIPT
-════════════════════════════════════════════ -->
 <script>
-/* ━━━ CONSTANTES ━━━ */
-const COST_PER_DAY = 41;
-const UNCERTAINTY  = 0.20;
-const LOCK_FACTOR  = 0.25;
-const K            = 3.5;
+const COST_PER_DAY=41,LOCK_FACTOR=0.25,K=3.5;
+const ECART_BANDS=[
+ {label:'Négatif',      color:'#d43b3b',bg:'rgba(212,59,59,.08)', border:'#d43b3b',ico:'🔴',low:-3,high:0, mid:-1},
+ {label:'Modéré',       color:'#c47a10',bg:'rgba(240,148,29,.08)',border:'#f0941d',ico:'🟡',low:0, high:1, mid:0.5},
+ {label:'Intermédiaire',color:'#0a5468',bg:'rgba(14,116,144,.08)',border:'#0e7490',ico:'🔵',low:1, high:3, mid:2},
+ {label:'Élevé',        color:'#1a8c4e',bg:'rgba(26,140,78,.08)', border:'#1a8c4e',ico:'🟢',low:3, high:5, mid:4},
+ {label:'Très élevé',   color:'#0f5c33',bg:'rgba(15,92,51,.10)',  border:'#0f5c33',ico:'🟩',low:5, high:10,mid:7}
+];
+const HORIZON_HINTS={'3':'⚡ Événements ponctuels : job dating, atelier, forum, information collective.','6':'📋 Formations courtes (< 1 mois) ou accompagnements courts / remobilisation.','12':'🎓 Formations ou accompagnements de 1 à 3 mois.','24':'📚 Formations plus longues (3–6 mois) ou dispositifs d\'accompagnement.','36':'🏗️ Formations très longues (> 6 mois) ou dispositifs pour publics très éloignés.'};
+let chDeTpe=null,chDeRoi=null,chEntOffres=null,chEntRoi=null;
+const fmtEur=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v);
+const fmtNum=v=>new Intl.NumberFormat('fr-FR',{maximumFractionDigits:0}).format(v);
+const fmtRoi=v=>(v===null||isNaN(v))?'—':v.toFixed(2).replace('.',',')+' ×';
+const BASE_SC={x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'DM Sans',size:10},color:'#6b7a8d',maxRotation:0}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'DM Sans',size:10},color:'#6b7a8d'}}};
 
-/* ━━━ INSTANCES GRAPHIQUES ━━━ */
-let chDeTpe=null, chDeDiff=null, chDeRoi=null;
-let chEntOffres=null, chEntJours=null, chEntRoi=null;
+function openAide(){document.getElementById('aide-modal').classList.add('open');document.body.style.overflow='hidden'}
+function closeAide(){document.getElementById('aide-modal').classList.remove('open');document.body.style.overflow=''}
+function switchMode(m){
+ ['de','ent'].forEach(x=>{document.getElementById('tab-'+x).classList.toggle('active',m===x);document.getElementById('panel-'+x).classList.toggle('active',m===x)});
+ document.getElementById('tab-ent').classList.toggle('teal-tab',m==='ent');
+ document.getElementById('empty').style.display='block';
+ document.getElementById('res-de').style.display='none';
+ document.getElementById('res-ent').style.display='none';
+}
+['de-c-humain','de-c-logistique','de-c-prestation','de-c-autres'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{
+ const t=['de-c-humain','de-c-logistique','de-c-prestation','de-c-autres'].reduce((s,i)=>s+(parseFloat(document.getElementById(i).value)||0),0);
+ document.getElementById('de-ct-display').textContent=fmtEur(t);
+}));
+['ent-c-humain','ent-c-logistique','ent-c-prestation','ent-c-autres'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{
+ const t=['ent-c-humain','ent-c-logistique','ent-c-prestation','ent-c-autres'].reduce((s,i)=>s+(parseFloat(document.getElementById(i).value)||0),0);
+ document.getElementById('ent-ct-display').textContent=fmtEur(t);
+}));
+document.querySelectorAll('input[name="de-atype"]').forEach(r=>r.addEventListener('change',()=>document.getElementById('dur-field').classList.toggle('show',r.value==='duree'&&r.checked)));
+document.querySelectorAll('input[name="de-horizon"]').forEach(r=>r.addEventListener('change',()=>{document.getElementById('horizon-desc-hint').textContent=HORIZON_HINTS[r.value]||'';updateStabUI()}));
+document.getElementById('horizon-desc-hint').textContent=HORIZON_HINTS['12'];
 
-/* ━━━ FORMATAGE ━━━ */
-const fmtEur = v => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v);
-const fmtNum = v => new Intl.NumberFormat('fr-FR',{maximumFractionDigits:0}).format(v);
-const fmtRoi = v => (isNaN(v)||v===null) ? '—' : v.toFixed(2).replace('.',',') + ' ×';
+function getBand(v){if(v<0)return ECART_BANDS[0];if(v<1)return ECART_BANDS[1];if(v<3)return ECART_BANDS[2];if(v<5)return ECART_BANDS[3];return ECART_BANDS[4]}
 
-/* ━━━ BASCULE DE MODE ━━━ */
-function switchMode(mode) {
-  // tabs
-  document.getElementById('tab-de').classList.toggle('active',   mode==='de');
-  document.getElementById('tab-ent').classList.toggle('active',  mode==='ent');
-  document.getElementById('tab-ent').classList.toggle('teal',    mode==='ent');
-  // sidebar panels
-  document.getElementById('panel-de').classList.toggle('active', mode==='de');
-  document.getElementById('panel-ent').classList.toggle('active',mode==='ent');
-  // hide all results
-  document.getElementById('empty').style.display   = 'block';
-  document.getElementById('res-de').style.display  = 'none';
-  document.getElementById('res-ent').style.display = 'none';
+function updateEcartUI(){
+ const v=parseFloat(document.getElementById('de-ecart-slider').value);
+ const b=getBand(v);
+ const badge=document.getElementById('ecart-badge');
+ badge.style.background=b.bg;badge.style.borderColor=b.border;badge.style.color=b.color;
+ document.getElementById('ecart-badge-ico').textContent=b.ico;
+ document.getElementById('ecart-badge-val').textContent=(v>=0?'+':'')+v.toFixed(1).replace('.',',');
+ document.getElementById('ecart-badge-label').textContent=' point'+(Math.abs(v)>1?'s':'')+' — '+b.label;
+ const pct=((v-(-5))/(10-(-5)))*100;
+ document.getElementById('de-ecart-slider').style.background=`linear-gradient(to right,${b.color} 0%,${b.color} ${pct}%,#d8e2ef ${pct}%,#d8e2ef 100%)`;
+}
+updateEcartUI();
+
+function updateStabUI(){
+ const s=parseInt(document.getElementById('de-stab-slider').value);
+ const horizEl=document.querySelector('input[name="de-horizon"]:checked');
+ const T=horizEl?parseInt(horizEl.value):12;
+ const ord=n=>n===1?'1<sup>er</sup>':n+'<sup>ème</sup>';
+ document.getElementById('stab-badge').innerHTML=`Au bout de <b>${s} mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>${ord(T)} mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.`;
+ const pct=((s-1)/(35-1))*100;
+ document.getElementById('de-stab-slider').style.background=`linear-gradient(to right,var(--navy) 0%,var(--navy) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
+}
+updateStabUI();
+
+function computeDiff(t,atype,D,stab,ecart){
+ const norm=1-Math.exp(-K);
+ if(atype==='ponctuelle'){if(!stab||stab<=0)return ecart;if(t<=stab)return ecart*(1-Math.exp(-K*t/stab))/norm;return ecart}
+ const lockVal=-LOCK_FACTOR*Math.abs(ecart);
+ if(t<=D)return lockVal;const rem=stab-D;if(rem<=0)return ecart;
+ if(t<=stab)return lockVal+(ecart-lockVal)*(1-Math.exp(-K*(t-D)/rem))/norm;
+ return ecart;
+}
+function computeROI(N,totalCost,T,atype,D,stab,ecartPct){
+ const times=Array.from({length:T+1},(_,i)=>i);
+ const diff=times.map(t=>computeDiff(t,atype,D,stab,ecartPct));
+ let integral=0;for(let i=1;i<=T;i++)integral+=(diff[i]+diff[i-1])/2;
+ const daysPerPerson=(integral/100)*30.5,totalDays=N*daysPerPerson,totalBenefit=totalDays*COST_PER_DAY;
+ const roi=totalCost>0?(totalBenefit-totalCost)/totalCost:null;
+ return{times,diff,daysPerPerson,totalDays,totalCost,totalBenefit,roi};
 }
 
-/* ━━━ COÛT TOTAL EN DIRECT — DE ━━━ */
-['de-c-humain','de-c-logistique','de-c-prestation','de-c-autres'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => {
-    const t = ['de-c-humain','de-c-logistique','de-c-prestation','de-c-autres']
-      .reduce((s,i)=>s+(parseFloat(document.getElementById(i).value)||0),0);
-    document.getElementById('de-ct-display').textContent = fmtEur(t);
-  });
-});
+function renderDiffChart(rMid,rLow,rHigh,T,atype,D,stab){
+ const ctx=document.getElementById('de-ch-tpe').getContext('2d');
+ if(chDeTpe)chDeTpe.destroy();
+ const step=T<=12?1:T<=24?2:T<=36?3:6;
+ const labels=rMid.times.map(t=>t%step===0?'M'+t:'');
+ const mid=rMid.diff.map(v=>+v.toFixed(3));
+ const hi=rHigh.diff.map(v=>+v.toFixed(3));
+ const lo=rLow.diff.map(v=>+v.toFixed(3));
+ const posData=mid.map(v=>v>0?v:0);
+ const negData=mid.map(v=>v<0?v:0);
 
-/* ━━━ COÛT TOTAL EN DIRECT — ENT ━━━ */
-['ent-c-humain','ent-c-logistique','ent-c-prestation','ent-c-autres'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => {
-    const t = ['ent-c-humain','ent-c-logistique','ent-c-prestation','ent-c-autres']
-      .reduce((s,i)=>s+(parseFloat(document.getElementById(i).value)||0),0);
-    document.getElementById('ent-ct-display').textContent = fmtEur(t);
-  });
-});
-
-/* ━━━ TOGGLE DURÉE D'ACTION (DE) ━━━ */
-document.querySelectorAll('input[name="de-atype"]').forEach(r => {
-  r.addEventListener('change', () => {
-    document.getElementById('dur-field').classList.toggle('show', r.value==='duree' && r.checked);
-  });
-});
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   MODULE DE : COURBES TPE + ROI
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function satCurve(t, T, target) {
-  if (T===0) return target;
-  const norm = 1 - Math.exp(-K);
-  return target * (1 - Math.exp(-K*t/T)) / norm;
-}
-function refCurve(t, T, tpeRef) { return satCurve(t, T, tpeRef); }
-function benCurve(t, T, tpeObs, tpeRef, atype, D) {
-  if (atype==='ponctuelle') return satCurve(t, T, tpeObs);
-  const refAtD  = satCurve(D, T, tpeRef);
-  const lockEnd = LOCK_FACTOR * refAtD;
-  const norm    = 1 - Math.exp(-K);
-  if (t<=D) return D>0 ? (t/D)*lockEnd : 0;
-  const rem = T-D;
-  if (rem<=0) return tpeObs;
-  return lockEnd + (tpeObs-lockEnd) * (1-Math.exp(-K*(t-D)/rem)) / norm;
-}
-function computeROI_DE(p) {
-  const { N, costs, T, tpeObs, tpeRef, atype, D } = p;
-  const totalCost = costs.humain + costs.logistique + costs.prestation + costs.autres;
-  const times = Array.from({length:T+1},(_,i)=>i);
-  const ref  = times.map(t=>refCurve(t,T,tpeRef));
-  const ben  = times.map(t=>benCurve(t,T,tpeObs,tpeRef,atype,D));
-  const diff = times.map((_,i)=>ben[i]-ref[i]);
-  let integral=0;
-  for(let i=1;i<=T;i++) integral+=(diff[i]+diff[i-1])/2;
-  const daysPerPerson = integral*30.5;
-  const totalDays     = N*daysPerPerson;
-  const totalBenefit  = totalDays*COST_PER_DAY;
-  const roi           = totalCost>0 ? totalBenefit/totalCost : null;
-  return { times, ref, ben, diff, daysPerPerson, totalDays, totalCost, totalBenefit, roi };
-}
-
-/* ── Scales helpers ── */
-const BASE_SCALES = {
-  x:{ grid:{color:'rgba(0,0,0,.04)'}, ticks:{font:{family:'DM Sans',size:11},color:'#6b7a8d',maxRotation:0} },
-  y:{ grid:{color:'rgba(0,0,0,.04)'}, ticks:{font:{family:'DM Sans',size:11},color:'#6b7a8d'} }
-};
-function tickStep(T){ return T<=12?1:T<=24?2:T<=36?3:6; }
-
-/* ── Chart TPE (DE) ── */
-function renderTPEChart(r, T, atype, D, tpeRef) {
-  const ctx = document.getElementById('de-ch-tpe').getContext('2d');
-  if (chDeTpe) chDeTpe.destroy();
-  const step   = tickStep(T);
-  const labels = r.times.map(t => t%step===0 ? `M${t}` : '');
-  const tpeObs = r.ben[T];
-  const delta  = tpeObs - tpeRef;
-  const benH   = r.times.map(t=>benCurve(t,T,tpeObs+delta*UNCERTAINTY,tpeRef,atype,D)*100);
-  const benL   = r.times.map(t=>benCurve(t,T,Math.max(0,tpeObs-delta*UNCERTAINTY),tpeRef,atype,D)*100);
-
-  const vLine = { id:'vLine', afterDraw(ch){
-    if(atype!=='duree'||D<=0) return;
-    const {ctx:c,scales:{x,y}}=ch;
-    const px=x.getPixelForValue(D);
-    c.save(); c.beginPath(); c.moveTo(px,y.top); c.lineTo(px,y.bottom);
-    c.setLineDash([4,4]); c.lineWidth=1.5; c.strokeStyle='rgba(212,59,59,.5)'; c.stroke();
-    c.setLineDash([]); c.fillStyle='#d43b3b'; c.font='11px DM Sans';
-    c.fillText('Fin dispositif',px+5,y.top+16); c.restore();
-  }};
-
-  chDeTpe = new Chart(ctx, {
-    type:'line', plugins:[vLine],
-    data:{ labels, datasets:[
-      { label:'Fourchette bénéf.', data:benH, borderColor:'transparent',
-        backgroundColor:'rgba(28,52,97,.10)', fill:'+1', pointRadius:0, tension:0.4 },
-      { label:'TPE Bénéficiaires', data:r.ben.map(v=>+(v*100).toFixed(2)),
-        borderColor:'#1c3461', backgroundColor:'rgba(28,52,97,.05)',
-        fill:false, borderWidth:2.5, tension:0.4, pointRadius:0, pointHoverRadius:5 },
-      { label:' ', data:benL, borderColor:'transparent',
-        backgroundColor:'rgba(28,52,97,.10)', fill:'-1', pointRadius:0, tension:0.4 },
-      { label:'TPE Référence', data:r.ref.map(v=>+(v*100).toFixed(2)),
-        borderColor:'#f0941d', backgroundColor:'transparent',
-        fill:false, borderWidth:2, borderDash:[7,4], tension:0.4, pointRadius:0, pointHoverRadius:5 }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      plugins:{ legend:{labels:{font:{family:'DM Sans',size:12},color:'#1c2e4a',
-        usePointStyle:true,pointStyleWidth:18,filter:i=>i.text.trim()!==''}},
-        tooltip:{callbacks:{label:c=>{
-          if(!c.dataset.label.trim()||c.dataset.label==='Fourchette bénéf.') return null;
-          return ` ${c.dataset.label} : ${Number(c.raw).toFixed(1)} %`;
-        }}}},
-      scales:{ x:BASE_SCALES.x,
-        y:{...BASE_SCALES.y, ticks:{...BASE_SCALES.y.ticks,callback:v=>`${v} %`},
-          title:{display:true,text:'TPE (%)',color:'#6b7a8d',font:{size:11,family:'DM Sans'}}} }
-    }
-  });
-}
-
-/* ── Chart Diff (DE) ── */
-function renderDiffChart(r, T) {
-  const ctx = document.getElementById('de-ch-diff').getContext('2d');
-  if (chDeDiff) chDeDiff.destroy();
-  const step   = tickStep(T);
-  const labels = r.times.map(t => t%step===0 ? `M${t}` : '');
-  const data   = r.diff.map(v=>+(v*100).toFixed(2));
-  chDeDiff = new Chart(ctx,{
-    type:'bar',
-    data:{labels,datasets:[{
-      label:'Différentiel TPE (bénéf. − référence)', data,
-      backgroundColor:data.map(v=>v>=0?'rgba(26,140,78,.65)':'rgba(212,59,59,.65)'),
-      borderColor:data.map(v=>v>=0?'#1a8c4e':'#d43b3b'),
-      borderWidth:1, borderRadius:3
-    }]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{labels:{font:{family:'DM Sans',size:12},color:'#1c2e4a',usePointStyle:true,pointStyleWidth:18}},
-        tooltip:{callbacks:{label:c=>` ${c.raw>=0?'▲ Gain':'▼ Enfermement'} : ${Math.abs(c.raw).toFixed(1)} pp`}}},
-      scales:{ x:BASE_SCALES.x,
-        y:{...BASE_SCALES.y, ticks:{...BASE_SCALES.y.ticks,callback:v=>`${v>0?'+':''}${v} %`},
-          title:{display:true,text:'Différentiel (pp)',color:'#6b7a8d',font:{size:11,family:'DM Sans'}}} }
-    }
-  });
-}
-
-/* ── Chart Coût/Bénéfice horizontal ── */
-function renderHorizBarChart(canvasId, ref, labels, values, colors, borders) {
-  const ctx = document.getElementById(canvasId).getContext('2d');
-  if (ref[0]) ref[0].destroy();
-  ref[0] = new Chart(ctx,{
-    type:'bar',
-    data:{ labels, datasets:[{ data:values,
-      backgroundColor:colors, borderColor:borders, borderWidth:1.5, borderRadius:6 }]},
-    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false},
-        tooltip:{callbacks:{label:c=>` ${fmtEur(c.raw)}`}}},
-      scales:{ x:{...BASE_SCALES.x, ticks:{...BASE_SCALES.x.ticks,callback:v=>fmtEur(v)}}, y:BASE_SCALES.y }
-    }
-  });
-}
-
-/* ── Interprétation DE ── */
-function buildInterpDE(r, p) {
-  const { roi, totalDays, daysPerPerson, totalCost, totalBenefit } = r;
-  const { N, atype, D } = p;
-  const roiL = roi!==null ? roi*(1-UNCERTAINTY) : null;
-  const roiH = roi!==null ? roi*(1+UNCERTAINTY) : null;
-  let icon, color, headline, body;
-  if(totalDays<=0){
-    icon='⚠️'; color='var(--red)'; headline='Bénéfice social négatif ou nul';
-    body=`${atype==='duree'?`L'effet d'enfermement (${D} mois) `:'Le faible différentiel '}ne génère pas assez d'emploi supplémentaire pour couvrir le coût de l'action.`;
-  } else if(roi<1){
-    icon='🔶'; color='var(--amber-dark)'; headline='ROI positif mais partiel';
-    body=`L'action génère <strong>${fmtEur(totalBenefit)}</strong> de bénéfice social pour un coût de <strong>${fmtEur(totalCost)}</strong> (écart : ${fmtEur(totalBenefit-totalCost)}).`;
-  } else if(roi<3){
-    icon='✅'; color='var(--green)'; headline='ROI social positif';
-    body=`Chaque euro investi génère entre <strong>${fmtRoi(roiL)}</strong> et <strong>${fmtRoi(roiH)}</strong> de valeur sociale. Sur ${fmtNum(N)} bénéficiaires : <strong>${fmtNum(Math.round(totalDays))} jours de chômage évités</strong> (${fmtNum(Math.round(daysPerPerson))} j/pers.), valorisés à <strong>${fmtEur(totalBenefit)}</strong>.`;
-  } else if(roi<7){
-    icon='🚀'; color='var(--green)'; headline='Excellent ROI social';
-    body=`Fort retour sur investissement : <strong>${fmtRoi(roiL)}</strong> à <strong>${fmtRoi(roiH)}</strong> par euro investi. <strong>${fmtNum(Math.round(totalDays))} jours évités</strong> valorisés à <strong>${fmtEur(totalBenefit)}</strong> pour un coût de <strong>${fmtEur(totalCost)}</strong>.`;
-  } else {
-    icon='🏆'; color='var(--green)'; headline='ROI exceptionnel — à vérifier';
-    body=`ROI de <strong>${fmtRoi(roi)}</strong>. Vérifiez la robustesse des données TPE et l'homogénéité des populations comparées.`;
+ const vLines={id:'vLines',afterDraw(ch){
+  const{ctx:c,scales:{x,y}}=ch;
+  if(atype==='duree'&&D>0&&D<T){
+   const px=x.getPixelForValue(D);
+   c.save();c.beginPath();c.moveTo(px,y.top);c.lineTo(px,y.bottom);
+   c.setLineDash([4,4]);c.lineWidth=1.5;c.strokeStyle='rgba(212,59,59,.65)';c.stroke();
+   c.setLineDash([]);c.fillStyle='#d43b3b';c.font='9px DM Sans';c.textAlign='left';
+   c.fillText('Fin dispositif',px+3,y.bottom-16);
+   c.restore();
   }
-  let note='';
-  if(atype==='duree'&&D>0&&totalDays>0)
-    note=`<br><br><em style="color:var(--muted);">Note enfermement :</em> pendant les <strong>${D} premiers mois</strong>, l'effet d'enfermement a temporairement réduit le gain (barres rouges sur le graphique différentiel).`;
-  return `<div style="display:flex;gap:12px;align-items:flex-start;">
-    <span style="font-size:26px;line-height:1;">${icon}</span>
-    <div><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:${color};margin-bottom:7px;">${headline}</div>
-    <div>${body}${note}</div></div></div>`;
-}
-
-/* ━━━ CALCULER — MODE DE ━━━ */
-function calculateDE() {
-  const N    = parseFloat(document.getElementById('de-nb').value);
-  const cH   = parseFloat(document.getElementById('de-c-humain').value)||0;
-  const cL   = parseFloat(document.getElementById('de-c-logistique').value)||0;
-  const cP   = parseFloat(document.getElementById('de-c-prestation').value)||0;
-  const cA   = parseFloat(document.getElementById('de-c-autres').value)||0;
-  const atype= document.querySelector('input[name="de-atype"]:checked').value;
-  const D    = parseFloat(document.getElementById('de-duree').value)||0;
-  const T    = parseInt(document.getElementById('de-horizon').value,10);
-  const tpeObsPct = parseFloat(document.getElementById('de-tpe-obs').value);
-  const tpeRefPct = parseFloat(document.getElementById('de-tpe-ref').value);
-
-  const errs=[];
-  if(!N||N<=0) errs.push('Nombre de bénéficiaires invalide.');
-  if((cH+cL+cP+cA)<=0) errs.push('Veuillez saisir au moins un poste de coût.');
-  if(!T||T<=0||T>60) errs.push('Horizon invalide (1–60 mois).');
-  if(isNaN(tpeObsPct)||tpeObsPct<=0||tpeObsPct>100) errs.push('TPE observé invalide (1–100 %).');
-  if(isNaN(tpeRefPct)||tpeRefPct<=0||tpeRefPct>100) errs.push('TPE de référence invalide (1–100 %).');
-  if(atype==='duree'){ if(!D||D<=0) errs.push('Durée manquante.'); if(D>=T) errs.push('Durée doit être < horizon.'); }
-  if(errs.length){ alert('⚠️ '+errs.join('\n')); return; }
-
-  const tpeObs=tpeObsPct/100, tpeRef=tpeRefPct/100;
-  const params={ N, costs:{humain:cH,logistique:cL,prestation:cP,autres:cA}, T, tpeObs, tpeRef, atype, D };
-  const r = computeROI_DE(params);
-  const { roi, totalDays, daysPerPerson, totalCost, totalBenefit } = r;
-  const roiL=roi!==null?roi*(1-UNCERTAINTY):null;
-  const roiH=roi!==null?roi*(1+UNCERTAINTY):null;
-
-  document.getElementById('empty').style.display='none';
-  document.getElementById('res-ent').style.display='none';
-  const el=document.getElementById('res-de'); el.style.display='flex';
-
-  document.getElementById('de-kpi-cost').textContent=fmtEur(totalCost);
-  document.getElementById('de-kpi-cpb').textContent=fmtEur(totalCost/N)+' / bénéf.';
-  const dEl=document.getElementById('de-kpi-days');
-  dEl.textContent=fmtNum(Math.round(totalDays)); dEl.className='kpi-val '+(totalDays>=0?'pos':'neg');
-  document.getElementById('de-kpi-dpb').textContent=fmtNum(Math.round(daysPerPerson))+' j / bénéf.';
-  const rEl=document.getElementById('de-kpi-roi');
-  rEl.textContent=fmtRoi(roi); rEl.className='kpi-val '+(roi>=1?'pos':roi>=0?'':'neg');
-  document.getElementById('de-kpi-roi-rng').innerHTML=`Fourchette : <b>${fmtRoi(roiL)}</b> – <b>${fmtRoi(roiH)}</b>`;
-  const rc=document.getElementById('de-kpi-roi-card');
-  if(roi<0) rc.classList.add('neg'); else rc.classList.remove('neg');
-
-  setTimeout(()=>{
-    renderTPEChart(r, T, atype, D, tpeRef);
-    renderDiffChart(r, T);
-    const roiRef=[null];
-    renderHorizBarChart('de-ch-roi', roiRef,
-      ['Coût total de l\'action','Bénéfice social total'],
-      [totalCost, totalBenefit],
-      ['rgba(240,148,29,.75)', totalBenefit>=0?'rgba(26,140,78,.75)':'rgba(212,59,59,.75)'],
-      ['#f0941d', totalBenefit>=0?'#1a8c4e':'#d43b3b']
-    );
-    chDeRoi=roiRef[0];
-    document.getElementById('de-interp').innerHTML=buildInterpDE(r,params);
-    el.classList.add('fade-in');
-    if(window.innerWidth<960) el.scrollIntoView({behavior:'smooth',block:'start'});
-  },60);
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   MODULE ENTREPRISES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-/* ── Chart : répartition des offres ── */
-function renderOffresChart(offresTot, offresDe) {
-  const ctx = document.getElementById('ent-ch-offres').getContext('2d');
-  if (chEntOffres) chEntOffres.destroy();
-  const autresOffs = offresTot - offresDe;
-  chEntOffres = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Offres pourvues'],
-      datasets: [
-        { label: 'Dont demandeurs d\'emploi',
-          data: [offresDe],
-          backgroundColor: 'rgba(14,116,144,.7)', borderColor: '#0e7490', borderWidth:1.5, borderRadius:5 },
-        { label: 'Autres candidats',
-          data: [autresOffs],
-          backgroundColor: 'rgba(14,116,144,.18)', borderColor: 'rgba(14,116,144,.35)', borderWidth:1.5, borderRadius:5 }
-      ]
-    },
-    options: {
-      indexAxis:'y', responsive:true, maintainAspectRatio:false,
-      plugins: {
-        legend:{ labels:{ font:{family:'DM Sans',size:12}, color:'#1c2e4a', usePointStyle:true, pointStyleWidth:18 }},
-        tooltip:{ callbacks:{ label: c=>`  ${c.dataset.label} : ${fmtNum(c.raw)} offres` }}
-      },
-      scales: {
-        x:{ ...BASE_SCALES.x, stacked:true,
-          ticks:{...BASE_SCALES.x.ticks, callback:v=>v+' offres'} },
-        y:{ ...BASE_SCALES.y, stacked:true }
-      }
-    }
-  });
-}
-
-/* ── Chart : décomposition jours évités ── */
-function renderJoursChart(offresDe, duree, totalJours) {
-  const ctx = document.getElementById('ent-ch-jours').getContext('2d');
-  if (chEntJours) chEntJours.destroy();
-  const joursParOffre = duree * 30.5;
-  chEntJours = new Chart(ctx,{
-    type:'bar',
-    data:{
-      labels:['Jours / offre DE','Total jours évités'],
-      datasets:[{
-        data:[ joursParOffre, totalJours ],
-        backgroundColor:['rgba(14,116,144,.55)','rgba(26,140,78,.7)'],
-        borderColor:['#0e7490','#1a8c4e'],
-        borderWidth:1.5, borderRadius:6
-      }]
-    },
-    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false},
-        tooltip:{callbacks:{label:c=>` ${fmtNum(Math.round(c.raw))} jours`}}},
-      scales:{ x:{...BASE_SCALES.x,ticks:{...BASE_SCALES.x.ticks,callback:v=>fmtNum(v)+' j'}}, y:BASE_SCALES.y }
-    }
-  });
-}
-
-/* ── Interprétation Entreprises ── */
-function buildInterpENT(p) {
-  const { offresTot, offresDe, duree, totalCost } = p;
-  const totalJours   = offresDe * duree * 30.5;
-  const benefBrut    = totalJours * COST_PER_DAY;
-  const roi          = totalCost > 0 ? (benefBrut - totalCost) / totalCost : null;
-
-  let icon, color, headline, body;
-  if(roi===null||benefBrut<=0){
-    icon='⚠️'; color='var(--red)'; headline='Données insuffisantes';
-    body='Vérifiez les paramètres saisis.';
-  } else if(roi<0){
-    icon='🔶'; color='var(--red)'; headline='Bénéfice social inférieur au coût';
-    body=`Le bénéfice social brut (<strong>${fmtEur(benefBrut)}</strong>) ne couvre pas encore le coût engagé (<strong>${fmtEur(totalCost)}</strong>). Envisagez d'augmenter le nombre d'offres DE ou la durée des contrats.`;
-  } else if(roi<1){
-    icon='🔶'; color='var(--amber-dark)'; headline='ROI positif mais partiel';
-    body=`Le bénéfice net est de <strong>${fmtEur(benefBrut-totalCost)}</strong>. Chaque euro investi génère <strong>${fmtRoi(roi+1)}</strong> de valeur sociale brute. Sur ${fmtNum(offresDe)} offres DE, <strong>${fmtNum(Math.round(totalJours))} jours de chômage évités</strong>.`;
-  } else if(roi<5){
-    icon='✅'; color='var(--teal)'; headline='Bon ROI social';
-    body=`L'action génère un bénéfice net de <strong>${fmtEur(benefBrut-totalCost)}</strong> (ROI : <strong>${fmtRoi(roi)}</strong>). Sur les <strong>${fmtNum(offresTot)} offres pourvues</strong>, ${fmtNum(offresDe)} l'ont été par des demandeurs d'emploi, représentant <strong>${fmtNum(Math.round(totalJours))} jours de chômage évités</strong>.`;
-  } else {
-    icon='🏆'; color='var(--green)'; headline='Excellent ROI social';
-    body=`ROI exceptionnel de <strong>${fmtRoi(roi)}</strong>. Chaque euro investi dans cette action entreprises génère <strong>${fmtEur(roi)}</strong> de bénéfice net pour la collectivité, via <strong>${fmtNum(Math.round(totalJours))} jours de chômage évités</strong>.`;
+  if(stab>0&&stab<T){
+   const px=x.getPixelForValue(stab);
+   c.save();c.beginPath();c.moveTo(px,y.top);c.lineTo(px,y.bottom);
+   c.setLineDash([5,3]);c.lineWidth=1.5;c.strokeStyle='rgba(26,140,78,.6)';c.stroke();
+   c.setLineDash([]);c.fillStyle='#1a8c4e';c.font='9px DM Sans';c.textAlign='left';
+   c.fillText('Stabilisation',px+3,y.bottom-5);
+   c.restore();
   }
+  // Marque TPE* axe Y
+  c.save();c.fillStyle='#1c3461';c.font='bold 9px DM Sans';c.textAlign='center';
+  const yTopPx=y.top+7;
+  c.fillText('TPE*',y.left!==undefined?y.left+22:30,yTopPx);
+  c.restore();
+ }};
 
-  const note = offresTot > offresDe
-    ? `<br><br><em style="color:var(--muted);">Note :</em> sur ${fmtNum(offresTot)} offres totales pourvues, ${fmtNum(offresTot-offresDe)} l'ont été par des candidats déjà en emploi ou hors demandeurs d'emploi — ces offres ne sont pas comptabilisées dans le ROI (pas de réduction de chômage directe).`
-    : '';
-
-  return `<div style="display:flex;gap:12px;align-items:flex-start;">
-    <span style="font-size:26px;line-height:1;">${icon}</span>
-    <div><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:${color};margin-bottom:7px;">${headline}</div>
-    <div>${body}${note}</div></div></div>`;
+ chDeTpe=new Chart(ctx,{
+  type:'line',plugins:[vLines],
+  data:{labels,datasets:[
+   {label:'Fourchette haute',data:hi,borderColor:'transparent',backgroundColor:'rgba(28,52,97,.07)',fill:'+1',pointRadius:0,tension:0.4,order:5},
+   {label:'Gain positif (intégrale)',data:posData,borderColor:'transparent',backgroundColor:'rgba(59,130,246,.2)',fill:{target:{value:0}},pointRadius:0,tension:0.4,order:4},
+   {label:'Gain négatif (intégrale)',data:negData,borderColor:'transparent',backgroundColor:'rgba(212,59,59,.2)',fill:{target:{value:0}},pointRadius:0,tension:0.4,order:4},
+   {label:'Écart taux de présence en emploi (pp)',data:mid,borderColor:'#1c3461',backgroundColor:'transparent',fill:false,borderWidth:2.5,tension:0.4,pointRadius:0,pointHoverRadius:5,order:2},
+   {label:' ',data:lo,borderColor:'transparent',backgroundColor:'rgba(28,52,97,.07)',fill:'-3',pointRadius:0,tension:0.4,order:5},
+   {label:'Référence (0)',data:Array(T+1).fill(0),borderColor:'rgba(240,148,29,.55)',backgroundColor:'transparent',fill:false,borderWidth:1.5,borderDash:[6,4],tension:0,pointRadius:0,order:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+   interaction:{mode:'index',intersect:false},
+   plugins:{legend:{labels:{font:{family:'DM Sans',size:10},color:'#1c2e4a',usePointStyle:true,pointStyleWidth:13,
+    filter:i=>i.text.trim()!==''&&i.text!=='Fourchette haute'&&i.text!==' '}},
+    tooltip:{callbacks:{label:c=>{if(!c.dataset.label.trim()||c.dataset.label===' ')return null;return' '+c.dataset.label+' : '+Number(c.raw).toFixed(1)+' pp'}}}},
+   scales:{x:BASE_SC.x,y:{...BASE_SC.y,ticks:{...BASE_SC.y.ticks,callback:v=>(v>0?'+':'')+v+' pp'},
+    title:{display:true,text:'Écart taux de présence en emploi (pp)',color:'#6b7a8d',font:{size:9,family:'DM Sans'}}}}}
+ });
 }
 
-/* ━━━ CALCULER — MODE ENTREPRISES ━━━ */
-function calculateENT() {
-  const offresTot = parseFloat(document.getElementById('ent-offres-tot').value);
-  const offresDe  = parseFloat(document.getElementById('ent-offres-de').value);
-  const duree     = parseFloat(document.getElementById('ent-duree-contrat').value);
-  const cH  = parseFloat(document.getElementById('ent-c-humain').value)||0;
-  const cL  = parseFloat(document.getElementById('ent-c-logistique').value)||0;
-  const cP  = parseFloat(document.getElementById('ent-c-prestation').value)||0;
-  const cA  = parseFloat(document.getElementById('ent-c-autres').value)||0;
-  const totalCost = cH+cL+cP+cA;
+function renderRoiRangeChart(cost,bLow,bMid,bHigh){
+ const ctx=document.getElementById('de-ch-roi').getContext('2d');
+ if(chDeRoi)chDeRoi.destroy();
+ const pos=bMid>=cost;
+ chDeRoi=new Chart(ctx,{type:'bar',
+  data:{labels:['Coût total','Bénéfice — bas','Bénéfice — central','Bénéfice — haut'],
+   datasets:[{data:[cost,bLow,bMid,bHigh],
+    backgroundColor:['rgba(240,148,29,.75)',pos?'rgba(26,140,78,.38)':'rgba(212,59,59,.38)',pos?'rgba(26,140,78,.62)':'rgba(212,59,59,.62)',pos?'rgba(26,140,78,.88)':'rgba(212,59,59,.88)'],
+    borderColor:['#f0941d',pos?'#1a8c4e':'#d43b3b',pos?'#1a8c4e':'#d43b3b',pos?'#1a8c4e':'#d43b3b'],borderWidth:1.5,borderRadius:5}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+   plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtEur(c.raw)}}},
+   scales:{x:{...BASE_SC.x,ticks:{...BASE_SC.x.ticks,callback:v=>fmtEur(v)}},y:BASE_SC.y}}
+ });
+}
 
-  const errs=[];
-  if(!offresTot||offresTot<=0)       errs.push('Nombre d\'offres pourvues invalide.');
-  if(isNaN(offresDe)||offresDe<0)    errs.push('Nombre d\'offres pourvues à des DE invalide.');
-  if(offresDe>offresTot)             errs.push('Les offres DE ne peuvent pas dépasser le total des offres.');
-  if(!duree||duree<=0)               errs.push('Durée moyenne des contrats invalide.');
-  if(totalCost<=0)                   errs.push('Veuillez saisir au moins un poste de coût.');
-  if(errs.length){ alert('⚠️ '+errs.join('\n')); return; }
+function buildInterpDE(rMid,rLow,rHigh,atype,D,band,stab,T,ecartVal){
+ const{roi:rm,totalDays,daysPerPerson,totalCost,totalBenefit}=rMid;
+ const rl=rLow.roi,rh=rHigh.roi;
+ let icon,color,hl,body;
+ if(rm===null){icon='⚠️';color='var(--red)';hl='Données insuffisantes';body='Vérifiez les paramètres saisis.';}
+ else if(rm<0){icon='🔴';color='var(--red)';hl='Bénéfice social inférieur au coût sur cet horizon';body='Le bénéfice social (<b>'+fmtEur(totalBenefit)+'</b>) ne couvre pas encore le coût (<b>'+fmtEur(totalCost)+'</b>). Fourchette ROI : <b>'+fmtRoi(rl)+'</b> à <b>'+fmtRoi(rh)+'</b>.'+(atype==='duree'?' L\'effet d\'enfermement (<b>'+D+' mois</b>) pèse encore sur le bilan.':'');}
+ else if(rm<1){icon='🟡';color='var(--amber-dark)';hl='ROI positif mais partiel';body='Bénéfice social : <b>'+fmtEur(totalBenefit)+'</b> pour un coût de <b>'+fmtEur(totalCost)+'</b>. Fourchette ROI : <b>'+fmtRoi(rl)+'</b> à <b>'+fmtRoi(rh)+'</b> (écart : <em>'+band.label+'</em>). Bénéfice net : <b>'+fmtEur(totalBenefit-totalCost)+'</b>.';}
+ else if(rm<3){icon='✅';color='var(--green)';hl='Bon ROI social';body='Sur <b>'+T+' mois</b>, chaque euro investi génère entre <b>'+fmtRoi(rl)+'</b> et <b>'+fmtRoi(rh)+'</b> de valeur sociale. <b>'+fmtNum(Math.round(totalDays))+' jours de chômage évités</b> ('+fmtNum(Math.round(daysPerPerson))+' j/bénéf.), valorisés <b>'+fmtEur(totalBenefit)+'</b>. Écart de taux de présence en emploi : '+(ecartVal>=0?'+':'')+ecartVal.toFixed(1)+' pp (<em>'+band.label+'</em>).';}
+ else if(rm<7){icon='🚀';color='var(--green)';hl='Excellent ROI social';body='Fort retour : <b>'+fmtRoi(rl)+'</b> à <b>'+fmtRoi(rh)+'</b> par euro. <b>'+fmtNum(Math.round(totalDays))+' jours évités</b> → <b>'+fmtEur(totalBenefit)+'</b>. Stabilisation au mois <b>'+stab+'</b>. Bénéfice net : <b>'+fmtEur(totalBenefit-totalCost)+'</b>.';}
+ else{icon='🏆';color='var(--green)';hl='ROI exceptionnel — vérifiez les hypothèses';body='ROI central de <b>'+fmtRoi(rm)+'</b>. Vérifiez la robustesse de l\'écart de taux de présence en emploi retenu et l\'homogénéité des populations (risque de biais de sélection/écrémage).';}
+ const ne=atype==='duree'&&D>0?'<br><br><em style="color:var(--muted);font-size:11.5px">ℹ️ Effet d\'enfermement de <b>'+D+' mois</b> intégré dans le calcul (taux de présence en emploi temporairement pénalisé).</em>':'';
+ return'<div style="display:flex;gap:11px;align-items:flex-start"><span style="font-size:23px;line-height:1">'+icon+'</span><div><div style="font-family:\'Syne\',sans-serif;font-size:14px;font-weight:700;color:'+color+';margin-bottom:6px">'+hl+'</div><div>'+body+ne+'</div></div></div>';
+}
 
-  // Calcul
-  const totalJours = offresDe * duree * 30.5;
-  const benefBrut  = totalJours * COST_PER_DAY;
-  const roi        = totalCost > 0 ? (benefBrut - totalCost) / totalCost : null;
-  const joursParOffre = duree * 30.5;
-  const isPos = benefBrut >= totalCost;
+function calculateDE(){
+ const N=parseFloat(document.getElementById('de-nb').value);
+ const cH=parseFloat(document.getElementById('de-c-humain').value)||0;
+ const cL=parseFloat(document.getElementById('de-c-logistique').value)||0;
+ const cP=parseFloat(document.getElementById('de-c-prestation').value)||0;
+ const cA=parseFloat(document.getElementById('de-c-autres').value)||0;
+ const atype=document.querySelector('input[name="de-atype"]:checked').value;
+ const D=parseFloat(document.getElementById('de-duree').value)||0;
+ const horizEl=document.querySelector('input[name="de-horizon"]:checked');
+ const T=horizEl?parseInt(horizEl.value):0;
+ const ecartVal=parseFloat(document.getElementById('de-ecart-slider').value);
+ const stab=parseInt(document.getElementById('de-stab-slider').value)||0;
+ const totalCost=cH+cL+cP+cA;
+ const band=getBand(ecartVal);
+ const territoire=document.getElementById('de-territoire').value.trim();
+ const titre=document.getElementById('de-titre').value.trim();
+ const desc=document.getElementById('de-desc').value.trim();
+ const errs=[];
+ if(!N||N<=0)errs.push('Nombre de bénéficiaires invalide.');
+ if(totalCost<=0)errs.push('Veuillez saisir au moins un poste de coût.');
+ if(!T||T<=0)errs.push('Veuillez sélectionner un horizon.');
+ if(!stab||stab<=0)errs.push('Délai de stabilisation invalide.');
+ if(stab>=T)errs.push('Délai de stabilisation ('+stab+'m) doit être < horizon ('+T+'m).');
+ if(atype==='duree'){if(!D||D<=0)errs.push('Durée du dispositif manquante.');if(D>=T)errs.push('Durée doit être < horizon.');if(D>=stab)errs.push('Durée doit être < délai de stabilisation.');}
+ if(errs.length){alert('⚠️ '+errs.join('\n'));return}
+ const rMid=computeROI(N,totalCost,T,atype,D,stab,ecartVal);
+ const rLow=computeROI(N,totalCost,T,atype,D,stab,band.low);
+ const rHigh=computeROI(N,totalCost,T,atype,D,stab,band.high);
+ document.getElementById('res-de-titre').textContent=titre||'Action non nommée';
+ document.getElementById('res-de-territoire').textContent=territoire||'';
+ document.getElementById('res-de-desc').textContent=desc||'';
+ document.getElementById('res-de-horizon-badge').textContent='Horizon : '+T+' mois · '+(ecartVal>=0?'+':'')+ecartVal.toFixed(1)+' pp ('+band.label+')';
+ document.getElementById('empty').style.display='none';
+ document.getElementById('res-ent').style.display='none';
+ const el=document.getElementById('res-de');el.style.display='flex';
+ document.getElementById('de-kpi-cost').textContent=fmtEur(totalCost);
+ document.getElementById('de-kpi-cpb').textContent=fmtEur(totalCost/N)+' / bénéf.';
+ const dEl=document.getElementById('de-kpi-days');dEl.textContent=fmtNum(Math.round(rMid.totalDays));dEl.className='kpi-val '+(rMid.totalDays>=0?'pos':'neg');
+ document.getElementById('de-kpi-dpb').textContent=fmtNum(Math.round(rMid.daysPerPerson))+' j / bénéf.';
+ const rEl=document.getElementById('de-kpi-roi');rEl.textContent=fmtRoi(rMid.roi);rEl.className='kpi-val '+(rMid.roi>=1?'pos':rMid.roi>=0?'':'neg');
+ document.getElementById('de-kpi-roi-rng').innerHTML='Fourchette : <b>'+fmtRoi(rLow.roi)+'</b> – <b>'+fmtRoi(rHigh.roi)+'</b>';
+ const rc=document.getElementById('de-kpi-roi-card');if(rMid.roi<0)rc.classList.add('neg');else rc.classList.remove('neg');
+ setTimeout(()=>{
+  renderDiffChart(rMid,rLow,rHigh,T,atype,D,stab);
+  renderRoiRangeChart(totalCost,rLow.totalBenefit,rMid.totalBenefit,rHigh.totalBenefit);
+  document.getElementById('de-interp').innerHTML=buildInterpDE(rMid,rLow,rHigh,atype,D,band,stab,T,ecartVal);
+  el.classList.add('fade-in');
+  if(window.innerWidth<960)el.scrollIntoView({behavior:'smooth',block:'start'});
+ },60);
+}
 
-  const params = { offresTot, offresDe, duree, totalCost, totalJours, benefBrut, roi };
-
-  // Affichage
-  document.getElementById('empty').style.display='none';
-  document.getElementById('res-de').style.display='none';
-  const el=document.getElementById('res-ent'); el.style.display='flex';
-
-  // KPI
-  document.getElementById('ent-kpi-offres').textContent = fmtNum(offresDe);
-  document.getElementById('ent-kpi-offres-sub').textContent =
-    offresTot===offresDe ? 'toutes les offres' : `sur ${fmtNum(offresTot)} offres totales`;
-
-  const dEl=document.getElementById('ent-kpi-days');
-  dEl.textContent=fmtNum(Math.round(totalJours)); dEl.className='kpi-val pos';
-  document.getElementById('ent-kpi-days-sub').textContent=
-    fmtNum(Math.round(joursParOffre))+' j / offre DE';
-
-  const rEl=document.getElementById('ent-kpi-roi');
-  rEl.textContent=roi!==null ? fmtRoi(roi) : '—';
-  rEl.className='kpi-val '+(roi>=1?'pos':roi>=0?'':'neg');
-  document.getElementById('ent-kpi-roi-sub').innerHTML=
-    `Bénéfice net : <b>${fmtEur(benefBrut-totalCost)}</b>`;
-  const rc=document.getElementById('ent-kpi-roi-card');
-  if(roi<0) rc.classList.add('neg'); else rc.classList.remove('neg');
-
-  const bEl=document.getElementById('ent-kpi-benef');
-  bEl.textContent=fmtEur(benefBrut); bEl.className='kpi-val '+(benefBrut>=totalCost?'pos':'');
-  document.getElementById('ent-kpi-benef-sub').textContent=
-    fmtNum(Math.round(totalJours))+' j × 41 €';
-  const bc=document.getElementById('ent-kpi-benef-card');
-  if(benefBrut<totalCost) bc.classList.add('neg'); else bc.classList.remove('neg');
-
-  document.getElementById('ent-kpi-cost').textContent=fmtEur(totalCost);
-  document.getElementById('ent-kpi-cost-sub').textContent=
-    offresTot>0 ? fmtEur(totalCost/offresTot)+' / offre' : '';
-
-  setTimeout(()=>{
-    renderOffresChart(offresTot, offresDe);
-    renderJoursChart(offresDe, duree, totalJours);
-    const roiRef=[null];
-    renderHorizBarChart('ent-ch-roi', roiRef,
-      ['Coût total de l\'action','Bénéfice social brut'],
-      [totalCost, benefBrut],
-      ['rgba(240,148,29,.75)', isPos?'rgba(26,140,78,.75)':'rgba(212,59,59,.75)'],
-      ['#f0941d', isPos?'#1a8c4e':'#d43b3b']
-    );
-    chEntRoi=roiRef[0];
-    document.getElementById('ent-interp').innerHTML=buildInterpENT(params);
-    el.classList.add('fade-in');
-    if(window.innerWidth<960) el.scrollIntoView({behavior:'smooth',block:'start'});
-  },60);
+function calculateENT(){
+ const tot=parseFloat(document.getElementById('ent-offres-tot').value);
+ const de=parseFloat(document.getElementById('ent-offres-de').value);
+ const duree=parseFloat(document.getElementById('ent-duree-contrat').value);
+ const cH=parseFloat(document.getElementById('ent-c-humain').value)||0;
+ const cL=parseFloat(document.getElementById('ent-c-logistique').value)||0;
+ const cP=parseFloat(document.getElementById('ent-c-prestation').value)||0;
+ const cA=parseFloat(document.getElementById('ent-c-autres').value)||0;
+ const cost=cH+cL+cP+cA;
+ const territoire=document.getElementById('ent-territoire').value.trim();
+ const titre=document.getElementById('ent-titre').value.trim();
+ const desc=document.getElementById('ent-desc').value.trim();
+ const errs=[];
+ if(!tot||tot<=0)errs.push('Nombre d\'offres invalide.');
+ if(isNaN(de)||de<0)errs.push('Offres DE invalide.');
+ if(de>tot)errs.push('Les offres DE ne peuvent pas dépasser le total.');
+ if(!duree||duree<=0)errs.push('Durée des contrats invalide.');
+ if(cost<=0)errs.push('Veuillez saisir au moins un poste de coût.');
+ if(errs.length){alert('⚠️ '+errs.join('\n'));return}
+ const totalJ=de*duree*30.5,benef=totalJ*COST_PER_DAY,roi=cost>0?(benef-cost)/cost:null,isPos=benef>=cost;
+ document.getElementById('res-ent-titre').textContent=titre||'Action non nommée';
+ document.getElementById('res-ent-territoire').textContent=territoire||'';
+ document.getElementById('res-ent-desc').textContent=desc||'';
+ document.getElementById('empty').style.display='none';document.getElementById('res-de').style.display='none';
+ const el=document.getElementById('res-ent');el.style.display='flex';
+ document.getElementById('ent-kpi-offres').textContent=fmtNum(de);
+ document.getElementById('ent-kpi-offres-sub').textContent=tot===de?'toutes les offres':'sur '+fmtNum(tot)+' offres totales';
+ const dEl=document.getElementById('ent-kpi-days');dEl.textContent=fmtNum(Math.round(totalJ));dEl.className='kpi-val pos';
+ document.getElementById('ent-kpi-days-sub').textContent=fmtNum(Math.round(duree*30.5))+' j / offre DE';
+ const rEl=document.getElementById('ent-kpi-roi');rEl.textContent=roi!==null?fmtRoi(roi):'—';rEl.className='kpi-val '+(roi>=1?'pos':roi>=0?'':'neg');
+ document.getElementById('ent-kpi-roi-sub').innerHTML='Bénéfice net : <b>'+fmtEur(benef-cost)+'</b>';
+ const rc=document.getElementById('ent-kpi-roi-card');if(roi<0)rc.classList.add('neg');else rc.classList.remove('neg');
+ const bEl=document.getElementById('ent-kpi-benef');bEl.textContent=fmtEur(benef);bEl.className='kpi-val '+(benef>=cost?'pos':'');
+ document.getElementById('ent-kpi-benef-sub').textContent=fmtNum(Math.round(totalJ))+' j × 41 €';
+ const bc=document.getElementById('ent-kpi-benef-card');if(benef<cost)bc.classList.add('neg');else bc.classList.remove('neg');
+ document.getElementById('ent-kpi-cost').textContent=fmtEur(cost);
+ document.getElementById('ent-kpi-cost-sub').textContent=tot>0?fmtEur(cost/tot)+' / offre':'';
+ setTimeout(()=>{
+  const ctx1=document.getElementById('ent-ch-offres').getContext('2d');
+  if(chEntOffres)chEntOffres.destroy();
+  chEntOffres=new Chart(ctx1,{type:'bar',data:{labels:['Offres pourvues'],datasets:[
+   {label:'Demandeurs d\'emploi',data:[de],backgroundColor:'rgba(14,116,144,.7)',borderColor:'#0e7490',borderWidth:1.5,borderRadius:5},
+   {label:'Autres candidats',data:[tot-de],backgroundColor:'rgba(14,116,144,.18)',borderColor:'rgba(14,116,144,.35)',borderWidth:1.5,borderRadius:5}
+  ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+   plugins:{legend:{labels:{font:{family:'DM Sans',size:11},color:'#1c2e4a',usePointStyle:true,pointStyleWidth:13}},tooltip:{callbacks:{label:c=>' '+c.dataset.label+' : '+fmtNum(c.raw)+' offres'}}},
+   scales:{x:{...BASE_SC.x,stacked:true,ticks:{...BASE_SC.x.ticks,callback:v=>v+' offres'}},y:{...BASE_SC.y,stacked:true}}}});
+  const ctx2=document.getElementById('ent-ch-roi').getContext('2d');
+  if(chEntRoi)chEntRoi.destroy();
+  chEntRoi=new Chart(ctx2,{type:'bar',data:{labels:['Coût total','Bénéfice social brut'],datasets:[{
+   data:[cost,benef],backgroundColor:['rgba(240,148,29,.75)',isPos?'rgba(26,140,78,.75)':'rgba(212,59,59,.75)'],
+   borderColor:['#f0941d',isPos?'#1a8c4e':'#d43b3b'],borderWidth:1.5,borderRadius:6}]},
+   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtEur(c.raw)}}},
+    scales:{x:{...BASE_SC.x,ticks:{...BASE_SC.x.ticks,callback:v=>fmtEur(v)}},y:BASE_SC.y}}});
+  let i2,c2,h2,b2;
+  if(!benef||benef<=0){i2='⚠️';c2='var(--red)';h2='Données insuffisantes';b2='Vérifiez les paramètres.';}
+  else if(roi<0){i2='🔴';c2='var(--red)';h2='Bénéfice social inférieur au coût';b2='Le bénéfice (<b>'+fmtEur(benef)+'</b>) ne couvre pas le coût (<b>'+fmtEur(cost)+'</b>).';}
+  else if(roi<1){i2='🟡';c2='var(--amber-dark)';h2='ROI positif mais partiel';b2='Bénéfice net : <b>'+fmtEur(benef-cost)+'</b>. <b>'+fmtNum(Math.round(totalJ))+' jours de chômage évités</b> sur '+fmtNum(de)+' offres DE.';}
+  else if(roi<5){i2='✅';c2='var(--teal)';h2='Bon ROI social';b2='Bénéfice net : <b>'+fmtEur(benef-cost)+'</b> (ROI : <b>'+fmtRoi(roi)+'</b>). <b>'+fmtNum(Math.round(totalJ))+' jours évités</b> sur '+fmtNum(de)+' offres DE.';}
+  else{i2='🏆';c2='var(--green)';h2='Excellent ROI social';b2='ROI de <b>'+fmtRoi(roi)+'</b> — chaque euro génère <b>'+fmtEur(roi)+'</b> de bénéfice net via <b>'+fmtNum(Math.round(totalJ))+' jours évités</b>.';}
+  document.getElementById('ent-interp').innerHTML='<div style="display:flex;gap:11px;align-items:flex-start"><span style="font-size:23px;line-height:1">'+i2+'</span><div><div style="font-family:\'Syne\',sans-serif;font-size:14px;font-weight:700;color:'+c2+';margin-bottom:6px">'+h2+'</div><div>'+b2+'</div></div></div>';
+  el.classList.add('fade-in');
+  if(window.innerWidth<960)el.scrollIntoView({behavior:'smooth',block:'start'});
+ },60);
 }
 </script>
 </body>
