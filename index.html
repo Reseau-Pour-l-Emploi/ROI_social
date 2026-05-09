@@ -12,25 +12,12 @@
 :root{--navy:#1c3461;--navy-dark:#0f1e38;--navy-light:#2a4a7f;--amber:#f0941d;--amber-light:#fef5e7;--amber-dark:#c47a10;--teal:#0e7490;--teal-light:#e0f2fe;--teal-dark:#0a5468;--bg:#eef2f7;--surface:#ffffff;--text:#1c2e4a;--muted:#6b7a8d;--border:#d8e2ef;--green:#1a8c4e;--red:#d43b3b;--radius:12px;--radius-sm:8px;--shadow:0 1px 3px rgba(0,0,0,.07),0 6px 20px rgba(0,0,0,.06)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
-header{background:linear-gradient(135deg,#2d5fa8 0%,#3a74c8 60%,#2e63b0 100%);color:#fff;padding:26px 44px;position:relative;overflow:hidden}
+header{background:linear-gradient(135deg,#2d5fa8 0%,#3a74c8 60%,#2e63b0 100%);color:#fff;padding:22px 44px;position:relative;overflow:hidden;width:100%;box-sizing:border-box}
 header::before{content:'';position:absolute;top:-70px;right:-70px;width:300px;height:300px;border:55px solid rgba(255,255,255,.07);border-radius:50%}
 header::after{content:'';position:absolute;bottom:-80px;left:60%;width:220px;height:220px;border:40px solid rgba(255,255,255,.04);border-radius:50%}
 .badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35);padding:3px 11px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
-header h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,.1);
-
-  /* --- Libération de l'espace --- */
-  max-width: 100%;           /* Le texte occupe toute la largeur disponible */
-  width: max-content;        /* Force le conteneur à s'adapter à la longueur du texte */
-  white-space: nowrap;       /* Interdit formellement le retour à la ligne */
-}
-header p{margin-top:5px;opacity:.82;max-width:100%;font-size:13px;color:#dce8ff}
+header h1{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;line-height:1.2;letter-spacing:.02em;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.1);max-width:100%;width:max-content;white-space:nowrap}
+header p{margin-top:5px;opacity:.82;font-size:13px;color:#dce8ff}
 .mode-bar{background:var(--navy);padding:0 44px;display:flex;align-items:stretch}
 .mode-tab{display:flex;align-items:center;gap:8px;padding:12px 24px;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.55);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
 .mode-tab:hover{color:rgba(255,255,255,.85)}
@@ -69,7 +56,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:var(--navy-dark);border:3px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.3);cursor:pointer}
 .slider-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);padding:0 2px}
 .ecart-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:var(--radius-sm);border:2px solid;font-weight:700;font-size:12.5px;margin-top:7px;transition:all .3s;width:100%}
-.ecart-val{font-family:'Syne',sans-serif;font-size:17px;font-weight:800}
+.ecart-val{font-family:'Syne',sans-serif;font-size:17px;font-weight:700}
 .stab-badge{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 11px;font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.55}
 .stab-badge b{color:var(--navy)}
 /* HORIZON BUTTONS */
@@ -77,7 +64,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 .horizon-btn{position:relative}
 .horizon-btn input[type=radio]{position:absolute;opacity:0;width:0}
 .horizon-btn label{display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 3px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;text-align:center;color:var(--muted);font-size:10px;font-weight:600;margin:0}
-.horizon-btn label .hval{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:var(--navy-light);line-height:1}
+.horizon-btn label .hval{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy-light);line-height:1}
 .horizon-btn label .hunit{font-size:8px;text-transform:uppercase;letter-spacing:.05em}
 .horizon-btn input:checked+label{border-color:var(--navy);background:rgba(28,52,97,.07);color:var(--navy)}
 .horizon-btn input:checked+label .hval{color:var(--navy)}
@@ -134,7 +121,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 .modal-overlay.open{display:flex}
 .modal{background:var(--surface);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.3);max-width:800px;width:100%;max-height:88vh;overflow-y:auto;animation:fadeUp .25s ease}
 .modal-hd{padding:16px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:1}
-.modal-hd h2{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--navy-dark)}
+.modal-hd h2{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy-dark)}
 .modal-close{background:none;border:none;font-size:21px;cursor:pointer;color:var(--muted);line-height:1;padding:2px 6px;border-radius:4px;transition:all .15s}
 .modal-close:hover{background:var(--bg);color:var(--text)}
 .modal-bd{padding:18px 20px}
@@ -162,7 +149,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 [contenteditable]:empty:before{content:attr(data-placeholder);opacity:.4;pointer-events:none}
 .action-territoire{display:inline-block;background:rgba(240,148,29,.22);color:var(--amber);border:1px solid rgba(240,148,29,.35);padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-width:20px}
 .action-horizon-badge{display:inline-block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
-.action-titre{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;line-height:1.2;margin-bottom:5px;min-height:1.2em}
+.action-titre{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;line-height:1.2;margin-bottom:5px;min-height:1.2em}
 .action-desc{font-size:12.5px;opacity:.75;line-height:1.55;border-top:1px solid rgba(255,255,255,.12);padding-top:7px;margin-top:3px;min-height:1.4em}
 .edit-hint{font-size:9.5px;opacity:.4;font-style:italic;margin-top:4px}
 /* PRINT BAR */
@@ -192,7 +179,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 .kpi.c-benefice.neg::before{background:var(--red)}
 .kpi-bg-icon{position:absolute;top:11px;right:13px;font-size:19px;opacity:.12}
 .kpi-label{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.kpi-val{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;color:var(--navy);line-height:1}
+.kpi-val{font-family:'Syne',sans-serif;font-size:21px;font-weight:700;color:var(--navy);line-height:1}
 .kpi-val.pos{color:var(--green)}
 .kpi-val.neg{color:var(--red)}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:4px}
@@ -230,7 +217,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 /* GLOSSARY */
 .glossary{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 21px;border-top:4px solid var(--navy-dark)}
 .glossary-hd{display:flex;align-items:center;gap:8px;margin-bottom:13px;padding-bottom:9px;border-bottom:1px solid var(--border)}
-.glossary-hd h3{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:800;color:var(--navy-dark)}
+.glossary-hd h3{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;color:var(--navy-dark)}
 .glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:13px}
 .glossary-term{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:3px;display:flex;align-items:center;gap:5px}
 .glossary-def{font-size:11px;color:var(--muted);line-height:1.55}
@@ -362,7 +349,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
    <div class="card">
     <div class="card-hd"><div class="card-hd-icon">📝</div><h2>Description de l'action</h2></div>
     <div class="card-bd">
-     <div class="field"><label for="de-territoire">Territoire</label><input type="text" id="de-territoire" placeholder="ex. Comité Local Pour l'Emploi de Sarlat"></div>
+     <div class="field"><label for="de-territoire">Territoire</label><input type="text" id="de-territoire" placeholder="ex. Communauté de communes du Pays Fléchois"></div>
      <div class="field"><label for="de-titre">Titre de l'action évaluée</label><input type="text" id="de-titre" placeholder="ex. Formation aux métiers de la logistique"></div>
      <div class="field">
       <label for="de-desc">Description <span style="font-weight:400">(5 lignes · 500 car.)</span></label>
@@ -462,7 +449,7 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
       <label>Délai de stabilisation de l'impact (mois)</label>
       <div class="slider-wrap">
        <input type="range" id="de-stab-slider" min="1" max="11" step="1" value="9" oninput="updateStabUI()">
-       <div class="slider-labels" id="stab-slider-labels"><span>1 mois</span><span style="font-weight:600;color:var(--navy)" id="stab-max-label">11 mois</span></div>
+       <div class="slider-labels" id="stab-slider-labels"><span id="stab-min-label">1 mois</span><span style="font-weight:600;color:var(--navy)" id="stab-max-label">11 mois</span></div>
       </div>
       <div class="stab-badge" id="stab-badge">Au bout de <b>9 mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>12<sup>e</sup> mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.</div>
      </div>
@@ -695,7 +682,8 @@ function switchMode(m){
  const t=['ent-c-humain','ent-c-logistique','ent-c-prestation','ent-c-autres'].reduce((s,i)=>s+(parseFloat(document.getElementById(i).value)||0),0);
  document.getElementById('ent-ct-display').textContent=fmtEur(t);
 }));
-document.querySelectorAll('input[name="de-atype"]').forEach(r=>r.addEventListener('change',()=>document.getElementById('dur-field').classList.toggle('show',r.value==='duree'&&r.checked)));
+document.querySelectorAll('input[name="de-atype"]').forEach(r=>r.addEventListener('change',()=>{document.getElementById('dur-field').classList.toggle('show',r.value==='duree'&&r.checked);updateStabUI();}));
+document.getElementById('de-duree').addEventListener('input',updateStabUI);
 document.querySelectorAll('input[name="de-horizon"]').forEach(r=>r.addEventListener('change',()=>{
  document.getElementById('horizon-desc-hint').textContent=HORIZON_HINTS[r.value]||'';
  document.getElementById('de-horizon-custom').value='';
@@ -754,17 +742,26 @@ function updateStabUI(){
  const T=getHorizonValue();
  const stabSlider=document.getElementById('de-stab-slider');
  const maxStab=Math.max(1,T-1);
- stabSlider.min=1;
+ // Borne inférieure = durée du dispositif si "dans la durée", sinon 1
+ const atype=document.querySelector('input[name="de-atype"]:checked');
+ const isDuree=atype&&atype.value==='duree';
+ const D=isDuree?(parseInt(document.getElementById('de-duree').value)||1):1;
+ const minStab=isDuree?Math.min(D,maxStab):1;
+ stabSlider.min=minStab;
  stabSlider.max=maxStab;
- let cur=parseInt(stabSlider.value)||1;
- if(cur<1){cur=1;}
- if(cur>maxStab){cur=maxStab;stabSlider.value=cur;}
- // Update dynamic labels
- const lbl=document.getElementById('stab-max-label');
- if(lbl) lbl.textContent=maxStab+' mois';
+ let cur=parseInt(stabSlider.value)||minStab;
+ if(cur<minStab){cur=minStab;}
+ if(cur>maxStab){cur=maxStab;}
+ stabSlider.value=cur;
+ // Labels
+ const lblMin=document.getElementById('stab-min-label');
+ const lblMax=document.getElementById('stab-max-label');
+ if(lblMin) lblMin.textContent=minStab+(minStab===1?' mois':' mois (durée action)');
+ if(lblMax) lblMax.textContent=maxStab+' mois';
  const ord=n=>n===1?'1<sup>er</sup>':n+'<sup>ème</sup>';
  document.getElementById('stab-badge').innerHTML=`Au bout de <b>${cur} mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>${ord(T)} mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.`;
- const pct=maxStab>1?((cur-1)/(maxStab-1))*100:100;
+ const range=maxStab-minStab;
+ const pct=range>0?((cur-minStab)/range)*100:100;
  stabSlider.style.background=`linear-gradient(to right,var(--navy) 0%,var(--navy) ${pct}%,var(--border) ${pct}%,var(--border) 100%)`;
 }
 updateStabUI();
