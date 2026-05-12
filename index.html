@@ -743,12 +743,12 @@ updateEcartUI();
 function updateStabUI(){
  const T=getHorizonValue();
  const stabSlider=document.getElementById('de-stab-slider');
- const maxStab=Math.max(1,T-1);
- // Borne inférieure = durée du dispositif si "dans la durée", sinon 1
+ const maxStab=T;
+ // Borne inférieure = durée de l'action (pour les deux types), borne supérieure = horizon
  const atype=document.querySelector('input[name="de-atype"]:checked');
  const isDuree=atype&&atype.value==='duree';
  const D=isDuree?(parseInt(document.getElementById('de-duree').value)||1):1;
- const minStab=isDuree?Math.min(D,maxStab):1;
+ const minStab=Math.min(Math.max(1,D),maxStab);
  stabSlider.min=minStab;
  stabSlider.max=maxStab;
  let cur=parseInt(stabSlider.value)||minStab;
@@ -758,8 +758,8 @@ function updateStabUI(){
  // Labels
  const lblMin=document.getElementById('stab-min-label');
  const lblMax=document.getElementById('stab-max-label');
- if(lblMin) lblMin.textContent=minStab+(minStab===1?' mois':' mois (durée action)');
- if(lblMax) lblMax.textContent=maxStab+' mois';
+ if(lblMin) lblMin.textContent=minStab+(minStab>1?' mois (durée action)':' mois');
+ if(lblMax) lblMax.textContent=maxStab+' mois (horizon)';
  const ord=n=>n===1?'1<sup>er</sup>':n+'<sup>ème</sup>';
  document.getElementById('stab-badge').innerHTML=`Au bout de <b>${cur} mois</b>, le niveau d'écart de taux de présence en emploi observé au <b>${ord(T)} mois</b> était atteint — la courbe d'impact est stationnaire sur les derniers mois de l'horizon.`;
  const range=maxStab-minStab;
@@ -891,7 +891,7 @@ function calculateDE(){
  if(totalCost<=0)errs.push('Veuillez saisir au moins un poste de coût.');
  if(!T||T<=0)errs.push('Veuillez sélectionner ou saisir un horizon.');
  if(!stab||stab<=0)errs.push('Délai de stabilisation invalide.');
- if(stab>=T)errs.push('Délai de stabilisation ('+stab+'m) doit être < horizon ('+T+'m).');
+ if(stab>T)errs.push('Délai de stabilisation ('+stab+'m) ne peut pas dépasser l\'horizon ('+T+'m).');
  if(atype==='duree'){if(!D||D<=0)errs.push('Durée du dispositif manquante.');if(D>=T)errs.push('Durée doit être < horizon.');if(D>=stab)errs.push('Durée doit être < délai de stabilisation.');}
  if(errs.length){alert('⚠️ '+errs.join('\n'));return}
  const rMid=computeROI(N,totalCost,T,atype,D,stab,ecartVal);
